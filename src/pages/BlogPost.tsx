@@ -90,7 +90,22 @@ const BlogPost = () => {
           </div>
           
           <div className="flex justify-center mb-8">
-            <Button variant="outline" size="sm" className="gap-2">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="gap-2"
+              onClick={() => {
+                if (navigator.share) {
+                  navigator.share({
+                    title: post.title,
+                    url: window.location.href
+                  });
+                } else {
+                  navigator.clipboard.writeText(window.location.href);
+                  alert('Article link copied to clipboard!');
+                }
+              }}
+            >
               <Share2 className="h-4 w-4" />
               Share Article
             </Button>
@@ -179,7 +194,11 @@ const BlogPost = () => {
           <p className="text-white/90 mb-6">
             Subscribe to our newsletter for more insights and tips delivered to your inbox.
           </p>
-          <Button variant="secondary" className="bg-white text-accent-red hover:bg-white/90">
+          <Button 
+            variant="secondary" 
+            className="bg-white text-accent-red hover:bg-white/90"
+            onClick={() => alert('Thank you for your interest! Please visit our newsletter section to subscribe.')}
+          >
             Subscribe Now
           </Button>
         </div>

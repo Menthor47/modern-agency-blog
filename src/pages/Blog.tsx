@@ -256,7 +256,18 @@ const Blog = () => {
               placeholder="Enter your email"
               className="bg-white/10 border-white/30 text-white placeholder:text-white/70"
             />
-            <Button variant="secondary" className="bg-white text-accent-red hover:bg-white/90">
+            <Button 
+              variant="secondary" 
+              className="bg-white text-accent-red hover:bg-white/90"
+              onClick={() => {
+                const email = (document.querySelector('input[placeholder="Enter your email"]') as HTMLInputElement)?.value;
+                if (email) {
+                  alert(`Thank you for subscribing with ${email}! We'll be in touch soon.`);
+                } else {
+                  alert('Please enter a valid email address.');
+                }
+              }}
+            >
               Subscribe
             </Button>
           </div>
