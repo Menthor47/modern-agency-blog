@@ -1,8 +1,20 @@
+
 import { Monitor, Search, Megaphone, Palette, Code, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 const Services = () => {
+  const navigate = useNavigate();
+
+  const handleGetStarted = (service: string) => {
+    navigate('/contact', { state: { selectedService: service } });
+  };
+
+  const handleScheduleConsultation = () => {
+    navigate('/contact');
+  };
+
   const services = [
     {
       icon: Monitor,
@@ -92,7 +104,9 @@ const Services = () => {
                   
                   <div className="pt-4 border-t">
                     <div className="text-lg font-bold text-primary mb-4">{service.price}</div>
-                    <Button className="w-full">Get Started</Button>
+                    <Button className="w-full" onClick={() => handleGetStarted(service.title)}>
+                      Get Started
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -141,7 +155,7 @@ const Services = () => {
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Let's discuss your project and create a custom solution that drives real results for your business.
           </p>
-          <Button variant="secondary" size="lg" className="bg-white text-accent-red hover:bg-white/90">
+          <Button variant="secondary" size="lg" className="bg-white text-accent-red hover:bg-white/90" onClick={handleScheduleConsultation}>
             Schedule Free Consultation
           </Button>
         </div>

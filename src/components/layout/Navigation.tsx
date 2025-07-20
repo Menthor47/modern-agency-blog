@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -8,6 +8,7 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navigation = [
     { name: "Home", href: "/" },
@@ -19,6 +20,10 @@ const Navigation = () => {
   ];
 
   const isActive = (path: string) => location.pathname === path;
+
+  const handleGetAudit = () => {
+    navigate('/contact');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,7 +70,7 @@ const Navigation = () => {
                 )}
               </Link>
             ))}
-            <Button variant="hero" size="sm" className="ml-4">
+            <Button variant="hero" size="sm" className="ml-4" onClick={handleGetAudit}>
               Get Your Free Audit
             </Button>
           </div>
@@ -109,7 +114,7 @@ const Navigation = () => {
                 </Link>
               ))}
               <div className="px-3 py-2">
-                <Button variant="hero" size="sm" className="w-full">
+                <Button variant="hero" size="sm" className="w-full" onClick={handleGetAudit}>
                   Get Your Free Audit
                 </Button>
               </div>

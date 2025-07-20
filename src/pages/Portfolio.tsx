@@ -1,8 +1,21 @@
+
 import { ExternalLink, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 const Portfolio = () => {
+  const navigate = useNavigate();
+
+  const handleStartProject = () => {
+    navigate('/contact');
+  };
+
+  const handleViewProject = (projectTitle: string) => {
+    // For demo purposes, show an alert with project info
+    alert(`${projectTitle} - This would normally open the live project or case study details.`);
+  };
+
   const projects = [
     {
       title: "TechStart Solutions",
@@ -108,7 +121,7 @@ const Portfolio = () => {
                       <div className="bg-accent-red text-white px-3 py-1 rounded-full text-sm font-semibold">
                         {project.results}
                       </div>
-                      <Button variant="ghost" size="sm" className="text-white hover:bg-white/20">
+                      <Button variant="ghost" size="sm" className="text-white hover:bg-white/20" onClick={() => handleViewProject(project.title)}>
                         <ExternalLink className="h-4 w-4" />
                       </Button>
                     </div>
@@ -217,7 +230,7 @@ const Portfolio = () => {
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Let's create something amazing together. Your project could be our next featured case study.
           </p>
-          <Button variant="secondary" size="lg" className="bg-white text-accent-red hover:bg-white/90">
+          <Button variant="secondary" size="lg" className="bg-white text-accent-red hover:bg-white/90" onClick={handleStartProject}>
             Start Your Project
           </Button>
         </div>

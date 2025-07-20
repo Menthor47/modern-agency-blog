@@ -1,10 +1,28 @@
-
 import { ArrowRight, Star, Users, Award, TrendingUp, CheckCircle, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-analytics.jpg";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleGetAudit = () => {
+    navigate('/contact');
+  };
+
+  const handleViewWork = () => {
+    navigate('/portfolio');
+  };
+
+  const handleViewServices = () => {
+    navigate('/services');
+  };
+
+  const handleScheduleConsultation = () => {
+    navigate('/contact');
+  };
+
   const stats = [
     { icon: Users, value: "500+", label: "Happy Clients" },
     { icon: Award, value: "98%", label: "Success Rate" },
@@ -89,11 +107,11 @@ const Home = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button variant="hero" size="lg" className="group">
+                <Button variant="hero" size="lg" className="group" onClick={handleGetAudit}>
                   Get Your Free Audit
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <Button variant="hero-outline" size="lg">
+                <Button variant="hero-outline" size="lg" onClick={handleViewWork}>
                   View Our Work
                 </Button>
               </div>
@@ -188,7 +206,7 @@ const Home = () => {
           </div>
           
           <div className="text-center mt-12 animate-fade-in-up">
-            <Button size="lg" className="group">
+            <Button size="lg" className="group" onClick={handleViewServices}>
               View All Services
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
@@ -244,10 +262,10 @@ const Home = () => {
             Join hundreds of businesses that have accelerated their growth with our proven strategies.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="hero-secondary" size="lg">
+            <Button variant="hero-secondary" size="lg" onClick={handleGetAudit}>
               Get Free Audit
             </Button>
-            <Button variant="hero-outline" size="lg">
+            <Button variant="hero-outline" size="lg" onClick={handleScheduleConsultation}>
               Schedule Consultation
             </Button>
           </div>
