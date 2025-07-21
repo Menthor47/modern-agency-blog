@@ -1,8 +1,16 @@
+
 import { Users, Target, Lightbulb, Award } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
+  const navigate = useNavigate();
+
+  const handleStartProject = () => {
+    navigate('/contact');
+  };
+
   const values = [
     {
       icon: Target,
@@ -226,7 +234,12 @@ const About = () => {
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Let's create something extraordinary together. Join hundreds of satisfied clients who trust us with their digital success.
           </p>
-          <Button variant="secondary" size="lg" className="bg-white text-accent-red hover:bg-white/90">
+          <Button 
+            variant="secondary" 
+            size="lg" 
+            className="bg-white text-accent-red hover:bg-white/90"
+            onClick={handleStartProject}
+          >
             Start Your Project
           </Button>
         </div>

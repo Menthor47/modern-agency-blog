@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useLocation } from "react-router-dom";
+import { smoothScrollToElement } from "@/utils/scrollUtils";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -44,6 +46,10 @@ const Contact = () => {
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleScrollToForm = () => {
+    smoothScrollToElement('contact-form');
   };
 
   const contactInfo = [
@@ -91,10 +97,18 @@ const Contact = () => {
           <h1 className="text-5xl font-bold text-white mb-6">
             Get In Touch
           </h1>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
             Ready to transform your digital presence? Let's discuss your project and 
             create a strategy that drives real results for your business.
           </p>
+          <Button 
+            variant="hero-outline" 
+            size="lg"
+            onClick={handleScrollToForm}
+            className="hover:scale-105 transition-transform duration-300"
+          >
+            Get Started Now
+          </Button>
         </div>
       </section>
 
@@ -119,11 +133,20 @@ const Contact = () => {
       </section>
 
       {/* Contact Form & Map */}
-      <section className="py-20 bg-gray-50">
+      <section id="contact-form" className="py-20 bg-gray-50 scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-foreground mb-4">
+              Let's Start Your Project
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Fill out the form below and we'll get back to you within 24 hours with a custom strategy for your business.
+            </p>
+          </div>
+          
+          <div className="grid lg:grid-cols-3 gap-12">
             {/* Contact Form */}
-            <div>
+            <div className="lg:col-span-2">
               <Card className="border-0 shadow-xl">
                 <CardHeader>
                   <CardTitle className="text-2xl text-foreground">Send Us a Message</CardTitle>
@@ -143,6 +166,7 @@ const Contact = () => {
                           onChange={handleChange}
                           required
                           placeholder="John Doe"
+                          className="h-12"
                         />
                       </div>
                       <div className="space-y-2">
@@ -155,6 +179,7 @@ const Contact = () => {
                           onChange={handleChange}
                           required
                           placeholder="john@example.com"
+                          className="h-12"
                         />
                       </div>
                     </div>
@@ -168,6 +193,7 @@ const Contact = () => {
                           value={formData.company}
                           onChange={handleChange}
                           placeholder="Your Company"
+                          className="h-12"
                         />
                       </div>
                       <div className="space-y-2">
@@ -177,7 +203,7 @@ const Contact = () => {
                           name="service"
                           value={formData.service}
                           onChange={handleChange}
-                          className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                          className="w-full h-12 px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                         >
                           <option value="">Select a service</option>
                           {services.map((service) => (
@@ -198,11 +224,12 @@ const Contact = () => {
                         onChange={handleChange}
                         required
                         rows={6}
-                        placeholder="Tell us about your project and goals..."
+                        placeholder="Tell us about your project, goals, timeline, and budget..."
+                        className="resize-none"
                       />
                     </div>
                     
-                    <Button type="submit" size="lg" className="w-full group">
+                    <Button type="submit" size="lg" className="w-full group h-12">
                       Send Message
                       <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
@@ -211,7 +238,7 @@ const Contact = () => {
               </Card>
             </div>
 
-            {/* Map & Additional Info */}
+            {/* Sidebar with Map & Additional Info */}
             <div className="space-y-8">
               <Card className="border-0 shadow-xl">
                 <CardContent className="p-0">
@@ -326,7 +353,12 @@ const Contact = () => {
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Don't wait to transform your digital presence. Contact us today and let's discuss how we can help your business thrive.
           </p>
-          <Button variant="secondary" size="lg" className="bg-white text-accent-red hover:bg-white/90">
+          <Button 
+            variant="secondary" 
+            size="lg" 
+            className="bg-white text-accent-red hover:bg-white/90"
+            onClick={handleScrollToForm}
+          >
             Get Your Free Audit
           </Button>
         </div>
