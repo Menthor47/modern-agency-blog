@@ -1,4 +1,3 @@
-
 import { ArrowRight, Star, Users, Award, TrendingUp, CheckCircle, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/ui/magnetic-button";
@@ -32,7 +31,7 @@ const Home = () => {
     { icon: Users, value: 500, suffix: "+", label: "Happy Clients" },
     { icon: Award, value: 98, suffix: "%", label: "Success Rate" },
     { icon: TrendingUp, value: 300, suffix: "%", label: "Avg. Growth" },
-    { icon: Star, value: 4.9, suffix: "/5", label: "Client Rating" },
+    { icon: Star, value: 4.7, suffix: "/5", label: "Client Rating" },
   ];
 
   const services = [
@@ -131,7 +130,7 @@ const Home = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle className="h-5 w-5 text-green-400" />
-                    <span className="text-white/80">No Long-term Contracts</span>
+                    <span className="text-white/80">Flexible Contracts</span>
                   </div>
                 </div>
               </div>

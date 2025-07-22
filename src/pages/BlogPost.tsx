@@ -2,55 +2,58 @@ import { useParams, Link } from "react-router-dom";
 import { Calendar, User, ArrowLeft, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { blogPosts } from "@/data/blogData";
+import { useEffect } from "react";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
 
 const BlogPost = () => {
   const { id } = useParams();
+  const post = blogPosts.find((p) => p.id === Number(id));
+  const [newsletterEmail, setNewsletterEmail] = useState("");
 
-  // Mock blog post data - in a real app, this would be fetched based on the ID
-  const post = {
-    id: 1,
-    title: "10 Web Design Trends That Will Dominate 2024",
-    excerpt: "Discover the latest design trends that are shaping the digital landscape and how to implement them in your projects.",
-    author: "Sarah Johnson",
-    date: "March 15, 2024",
-    category: "Design",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=600&fit=crop",
-    readTime: "5 min read",
-    content: `
-      <p>The digital landscape is constantly evolving, and 2024 promises to bring exciting new design trends that will reshape how we create and interact with websites. As technology advances and user expectations grow, designers must stay ahead of the curve to create compelling digital experiences.</p>
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
-      <h2>1. AI-Powered Personalization</h2>
-      <p>Artificial intelligence is revolutionizing web design by enabling unprecedented levels of personalization. Websites now adapt in real-time based on user behavior, preferences, and demographics. This trend goes beyond simple recommendation engines to include dynamic layouts, personalized color schemes, and content that adjusts to individual users.</p>
+  if (!post) {
+    return (
+      <div className="min-h-screen pt-20 flex items-center justify-center">
+        <div>
+          <h2 className="text-2xl font-bold mb-4">Post not found</h2>
+          <Link to="/blog" className="text-primary underline">
+            Back to Blog
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
-      <h2>2. Immersive 3D Elements</h2>
-      <p>Three-dimensional design elements are becoming more accessible and performant. From subtle depth effects to fully interactive 3D models, these elements add a layer of engagement that traditional flat design cannot match. WebGL and CSS 3D transforms make it possible to implement these effects without sacrificing performance.</p>
+  // Find current post index
+  const currentIndex = blogPosts.findIndex((p) => p.id === post.id);
+  const prevPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
 
-      <h2>3. Micro-Interactions and Animations</h2>
-      <p>Subtle animations and micro-interactions continue to play a crucial role in user experience. These small details provide feedback, guide user attention, and create a sense of polish that users appreciate. However, the trend is moving toward more purposeful animations that serve specific functions rather than decorative flourishes.</p>
+  // Build related posts, including prev/next if available and not duplicated
+  const relatedSet = new Set<number>();
+  const relatedPosts: { post: typeof blogPosts[0]; label?: string }[] = [];
 
-      <h2>4. Dark Mode as Standard</h2>
-      <p>Dark mode is no longer a nice-to-have feature—it's become an expectation. Users appreciate the reduced eye strain and improved battery life on mobile devices. Designing for both light and dark modes from the start ensures consistency and accessibility across different user preferences.</p>
+  if (prevPost) {
+    relatedSet.add(prevPost.id);
+    relatedPosts.push({ post: prevPost, label: "Previous Article" });
+  }
+  if (nextPost) {
+    relatedSet.add(nextPost.id);
+    relatedPosts.push({ post: nextPost, label: "Next Article" });
+  }
 
-      <h2>5. Sustainable Web Design</h2>
-      <p>Environmental consciousness is influencing web design decisions. Designers are focusing on creating more efficient websites that consume less energy, load faster, and have smaller carbon footprints. This includes optimizing images, reducing unnecessary features, and choosing sustainable hosting solutions.</p>
-
-      <h2>Conclusion</h2>
-      <p>These trends represent more than just aesthetic choices—they reflect changing user needs, technological capabilities, and societal values. By understanding and implementing these trends thoughtfully, designers can create websites that not only look great but also provide meaningful value to users and businesses alike.</p>
-    `
-  };
-
-  const relatedPosts = [
-    {
-      id: 2,
-      title: "The Complete Guide to SEO in 2024",
-      image: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=250&fit=crop"
-    },
-    {
-      id: 3,
-      title: "How to Increase Conversion Rates by 300%",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop"
+  // Add up to 2 more related posts (excluding current, prev, next)
+  for (const p of blogPosts) {
+    if (p.id !== post.id && !relatedSet.has(p.id) && relatedPosts.length < 4) {
+      relatedPosts.push({ post: p });
+      relatedSet.add(p.id);
     }
-  ];
+  }
 
   return (
     <div className="min-h-screen pt-20">
@@ -162,7 +165,7 @@ const BlogPost = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-foreground mb-8">Related Articles</h2>
           <div className="grid md:grid-cols-2 gap-6">
-            {relatedPosts.map((relatedPost) => (
+            {relatedPosts.map(({ post: relatedPost, label }) => (
               <Card key={relatedPost.id} className="overflow-hidden hover:shadow-lg transition-shadow duration-300 border-0 shadow-md">
                 <img
                   src={relatedPost.image}
@@ -170,6 +173,11 @@ const BlogPost = () => {
                   className="w-full h-32 object-cover"
                 />
                 <CardContent className="p-4">
+                  {label && (
+                    <span className="block text-xs text-accent-red font-semibold mb-1 uppercase tracking-wider">
+                      {label}
+                    </span>
+                  )}
                   <h3 className="font-semibold text-foreground mb-2 line-clamp-2">
                     {relatedPost.title}
                   </h3>
@@ -185,22 +193,33 @@ const BlogPost = () => {
         </div>
       </section>
 
-      {/* Newsletter CTA */}
-      <section className="py-16 bg-gradient-hero-alt">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Enjoyed This Article?
-          </h2>
-          <p className="text-white/90 mb-6">
-            Subscribe to our newsletter for more insights and tips delivered to your inbox.
+      {/* Newsletter Signup */}
+      <section className="py-20 bg-gradient-hero-alt">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-bold text-white mb-6">Stay Updated</h2>
+          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            Subscribe to our newsletter and get the latest insights delivered directly to your inbox.
           </p>
-          <Button 
-            variant="secondary" 
-            className="bg-white text-accent-red hover:bg-white/90"
-            onClick={() => alert('Thank you for your interest! Please visit our newsletter section to subscribe.')}
+          <form
+            action="https://nocodeform.io/f/687f637fdb51988aadff2a74"
+            method="POST"
+            target="_blank"
+            className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto"
           >
-            Subscribe Now
-          </Button>
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="Enter your email"
+              className="bg-white/10 border-white/30 text-white placeholder:text-white/70 rounded px-4 py-2 flex-1"
+            />
+            <button
+              type="submit"
+              className="bg-white text-accent-red hover:bg-white/90 rounded px-6 py-2 font-semibold"
+            >
+              Subscribe
+            </button>
+          </form>
         </div>
       </section>
     </div>

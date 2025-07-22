@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -155,15 +154,18 @@ const Contact = () => {
                   </p>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form
+                    action="https://nocodeform.io/f/687f64a459979a6047fe2d4b"
+                    method="POST"
+                    target="_blank"
+                    className="space-y-6"
+                  >
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="name">Full Name *</Label>
                         <Input
                           id="name"
                           name="name"
-                          value={formData.name}
-                          onChange={handleChange}
                           required
                           placeholder="John Doe"
                           className="h-12"
@@ -175,23 +177,18 @@ const Contact = () => {
                           id="email"
                           name="email"
                           type="email"
-                          value={formData.email}
-                          onChange={handleChange}
                           required
                           placeholder="john@example.com"
                           className="h-12"
                         />
                       </div>
                     </div>
-                    
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="company">Company</Label>
                         <Input
                           id="company"
                           name="company"
-                          value={formData.company}
-                          onChange={handleChange}
                           placeholder="Your Company"
                           className="h-12"
                         />
@@ -201,8 +198,6 @@ const Contact = () => {
                         <select
                           id="service"
                           name="service"
-                          value={formData.service}
-                          onChange={handleChange}
                           className="w-full h-12 px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                         >
                           <option value="">Select a service</option>
@@ -214,25 +209,24 @@ const Contact = () => {
                         </select>
                       </div>
                     </div>
-                    
                     <div className="space-y-2">
                       <Label htmlFor="message">Message *</Label>
                       <Textarea
                         id="message"
                         name="message"
-                        value={formData.message}
-                        onChange={handleChange}
                         required
                         rows={6}
                         placeholder="Tell us about your project, goals, timeline, and budget..."
                         className="resize-none"
                       />
                     </div>
-                    
-                    <Button type="submit" size="lg" className="w-full group h-12">
+                    <button
+                      type="submit"
+                      className="w-full group h-12 bg-primary text-white rounded px-6 py-2 font-semibold flex items-center justify-center"
+                    >
                       Send Message
                       <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Button>
+                    </button>
                   </form>
                 </CardContent>
               </Card>
