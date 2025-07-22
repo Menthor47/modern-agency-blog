@@ -1,8 +1,14 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-export const useScrollAnimation = (options = {}) => {
-  const elementRef = useRef<HTMLElement>(null);
+interface ScrollAnimationOptions {
+  threshold?: number;
+  rootMargin?: string;
+  once?: boolean;
+}
+
+export const useScrollAnimation = (options: ScrollAnimationOptions = {}) => {
+  const elementRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
