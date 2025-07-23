@@ -9,13 +9,13 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 100% 94%;
+    --background: 189 100% 82.2%;
     --foreground: 225 11% 37%;
 
-    --card: 0 100% 94%;
+    --card: 189 100% 82.2%;
     --card-foreground: 225 11% 37%;
 
-    --popover: 0 100% 94%;
+    --popover: 189 100% 82.2%;
     --popover-foreground: 225 11% 37%;
 
     --primary: 188 100% 49%;
@@ -47,8 +47,8 @@ All colors MUST be HSL.
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
     --gradient-hero: linear-gradient(135deg, hsl(225 11% 37%), hsl(188 100% 49%));
     --gradient-hero-alt: linear-gradient(135deg, hsl(var(--accent-red)), hsl(var(--secondary)));
-    --gradient-card: linear-gradient(145deg, hsl(0 100% 94% / 0.1), hsl(0 100% 94% / 0.05));
-    --gradient-subtle: linear-gradient(145deg, hsl(0 100% 94% / 0.8), hsl(0 100% 94% / 0.4));
+    --gradient-card: linear-gradient(145deg, hsl(189 100% 82.2% / 0.1), hsl(0 100% 94% / 0.05));
+    --gradient-subtle: linear-gradient(145deg, hsl(189 100% 82.2% / 0.8), hsl(0 100% 94% / 0.4));
     
     /* Shadows */
     --shadow-elegant: 0 20px 50px -10px hsl(var(--primary) / 0.3);
@@ -72,11 +72,11 @@ All colors MUST be HSL.
 
   .dark {
     --background: 225 11% 15%;
-    --foreground: 0 100% 94%;
+    --foreground: 0 189 100% 82.2%;
     --card: 225 11% 20%;
-    --card-foreground: 0 100% 94%;
+    --card-foreground: 0 189 100% 82.2%;
     --popover: 225 11% 20%;
-    --popover-foreground: 0 100% 94%;
+    --popover-foreground: 189 100% 82.2%;
     --primary: 188 100% 49%;
     --primary-foreground: 225 11% 15%;
     --secondary: 49 93% 63%;
