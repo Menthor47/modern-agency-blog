@@ -7,6 +7,8 @@ import heroImage from "@/assets/hero-analytics.jpg";
 import ScrollReveal from "@/components/ui/scroll-reveal";
 import AnimatedCounter from "@/components/ui/animated-counter";
 import FloatingElements from "@/components/ui/floating-elements";
+import LazyImage from "@/components/ui/lazy-image";
+import SEOHead from "@/components/ui/seo-head";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -78,8 +80,33 @@ const Home = () => {
     },
   ];
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Next.Level.Design",
+    "description": "Leading digital marketing agency specializing in web design, SEO, and growth strategies",
+    "url": "https://nextleveldesign.com",
+    "logo": "https://nextleveldesign.com/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+1-555-123-4567",
+      "contactType": "Customer Service"
+    },
+    "sameAs": [
+      "https://facebook.com/nextleveldesign",
+      "https://twitter.com/nextleveldesign",
+      "https://linkedin.com/company/nextleveldesign"
+    ]
+  };
+
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Next.Level.Design - Transform Your Business with Digital Excellence"
+        description="Leading digital marketing agency specializing in web design, SEO, and growth strategies. Join 500+ companies that trust us to elevate their digital presence."
+        keywords="digital marketing agency, web design, SEO optimization, digital transformation, online marketing, website development"
+        structuredData={structuredData}
+      />
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center bg-gradient-hero overflow-hidden">
         <div className="absolute inset-0 bg-black/20" />
@@ -138,11 +165,12 @@ const Home = () => {
             
             <ScrollReveal direction="right" delay={400}>
               <div className="relative group">
-                <img 
+                <LazyImage 
                   src={heroImage} 
-                  alt="Digital marketing analytics dashboard"
+                  alt="Digital marketing analytics dashboard showing performance metrics and growth charts"
                   className="rounded-lg shadow-floating transform rotate-2 group-hover:rotate-0 transition-all duration-500 hover:scale-105"
-                  loading="lazy"
+                  width={600}
+                  height={400}
                 />
                 <div className="absolute -top-4 -left-4 w-72 h-48 bg-gradient-card backdrop-blur-sm rounded-lg border border-white/20 p-6 animate-float">
                   <h3 className="text-white font-semibold mb-2 flex items-center gap-2">

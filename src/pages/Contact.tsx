@@ -8,6 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useLocation } from "react-router-dom";
 import { smoothScrollToElement } from "@/utils/scrollUtils";
+import EnhancedForm from "@/components/ui/enhanced-form";
+import SEOHead from "@/components/ui/seo-head";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -88,8 +90,28 @@ const Contact = () => {
     "Other"
   ];
 
+  const handleFormSubmit = async (data: any) => {
+    // Here you would integrate with your form service
+    console.log('Form submitted:', data);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  };
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Next.Level.Design",
+    "description": "Get in touch with our digital marketing experts for a free consultation",
+    "url": "https://nextleveldesign.com/contact"
+  };
+
   return (
     <div className="min-h-screen pt-20">
+      <SEOHead
+        title="Contact Us - Next.Level.Design Digital Marketing Agency"
+        description="Ready to transform your digital presence? Contact our expert team for a free consultation and custom strategy that drives real results."
+        structuredData={structuredData}
+      />
       {/* Hero Section */}
       <section className="py-20 bg-gradient-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -154,80 +176,10 @@ const Contact = () => {
                   </p>
                 </CardHeader>
                 <CardContent>
-                  <form
-                    action="https://nocodeform.io/f/687f64a459979a6047fe2d4b"
-                    method="POST"
-                    target="_blank"
-                    className="space-y-6"
-                  >
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Full Name *</Label>
-                        <Input
-                          id="name"
-                          name="name"
-                          required
-                          placeholder="John Doe"
-                          className="h-12"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email Address *</Label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          required
-                          placeholder="john@example.com"
-                          className="h-12"
-                        />
-                      </div>
-                    </div>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="company">Company</Label>
-                        <Input
-                          id="company"
-                          name="company"
-                          placeholder="Your Company"
-                          className="h-12"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="service">Service Interested In</Label>
-                        <select
-                          id="service"
-                          name="service"
-                          className="w-full h-12 px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                        >
-                          <option value="">Select a service</option>
-                          {services.map((service) => (
-                            <option key={service} value={service}>
-                              {service}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Message *</Label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        required
-                        rows={6}
-                        placeholder="Tell us about your project, goals, timeline, and budget..."
-                        className="resize-none"
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      className="w-full group h-12 bg-primary text-white rounded px-6 py-2 font-semibold flex items-center justify-center"
-                    >
-                      Send Message
-                      <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </button>
-                  </form>
+                  <EnhancedForm 
+                    onSubmit={handleFormSubmit}
+                    services={services}
+                  />
                 </CardContent>
               </Card>
             </div>

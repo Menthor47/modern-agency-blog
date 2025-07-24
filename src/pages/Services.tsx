@@ -3,6 +3,8 @@ import { Monitor, Search, Megaphone, Palette, Code, BarChart3 } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import SEOHead from "@/components/ui/seo-head";
+import ScrollReveal from "@/components/ui/scroll-reveal";
 
 const Services = () => {
   const navigate = useNavigate();
@@ -60,8 +62,33 @@ const Services = () => {
     }
   ];
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Digital Marketing Services",
+    "description": "Comprehensive digital marketing solutions including web design, SEO, and growth strategies",
+    "provider": {
+      "@type": "Organization",
+      "name": "Next.Level.Design"
+    },
+    "serviceType": [
+      "Web Design & Development",
+      "SEO Optimization", 
+      "Digital Marketing",
+      "Brand Strategy",
+      "Custom Development",
+      "Analytics & Reporting"
+    ]
+  };
+
   return (
     <div className="min-h-screen pt-20">
+      <SEOHead
+        title="Digital Marketing Services - Next.Level.Design"
+        description="Comprehensive digital marketing solutions including web design, SEO optimization, and growth strategies. Starting from $999/month with proven results."
+        keywords="digital marketing services, web design, SEO optimization, PPC campaigns, brand strategy, custom development"
+        structuredData={structuredData}
+      />
       {/* Hero Section */}
       <section className="py-20 bg-gradient-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
