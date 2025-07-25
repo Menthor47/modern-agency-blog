@@ -107,7 +107,9 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background: var(--gradient-subtle);
+    min-height: 100vh;
   }
 
   html {
