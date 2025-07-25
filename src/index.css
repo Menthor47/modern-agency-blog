@@ -110,10 +110,48 @@ All colors MUST be HSL.
     @apply text-foreground;
     background: var(--gradient-subtle);
     min-height: 100vh;
+    color: #5A5F66; /* Enhanced contrast for readability */
   }
 
   html {
     scroll-behavior: smooth;
+  }
+
+  /* Font optimization */
+  @font-face {
+    font-family: 'Poppins';
+    font-display: swap;
+    src: url('https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJfecg.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Lora';
+    font-display: swap;
+    src: url('https://fonts.gstatic.com/s/lora/v17/nwpTtK2nIhxE0q2IllmiWg.woff2') format('woff2');
+  }
+
+  /* Improved focus states */
+  .focus-visible {
+    outline: 2px dashed #0057FF !important;
+    outline-offset: 2px !important;
+  }
+
+  /* Touch target improvements */
+  button, a, [role="button"] {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* Fluid typography */
+  h1 { font-size: clamp(2rem, 4vw, 3.5rem); }
+  h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); }
+  h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+  p { font-size: clamp(1rem, 1.5vw, 1.125rem); }
+
+  /* Prevent horizontal overflow */
+  * {
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 }
 

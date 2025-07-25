@@ -4,11 +4,13 @@ import MagneticButton from "@/components/ui/magnetic-button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-analytics.jpg";
+import heroBannerWebP from "@/assets/hero-banner.webp";
 import ScrollReveal from "@/components/ui/scroll-reveal";
 import AnimatedCounter from "@/components/ui/animated-counter";
 import FloatingElements from "@/components/ui/floating-elements";
 import LazyImage from "@/components/ui/lazy-image";
 import SEOHead from "@/components/ui/seo-head";
+import JsonLd from "@/components/ui/json-ld";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -80,13 +82,13 @@ const Home = () => {
     },
   ];
 
-  const structuredData = {
+  const organizationStructuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Next.Level.Design",
     "description": "Leading digital marketing agency specializing in web design, SEO, and growth strategies",
-    "url": "https://nextleveldesign.com",
-    "logo": "https://nextleveldesign.com/logo.png",
+    "url": "https://preview--modern-agency-blog.lovable.app",
+    "logo": "https://preview--modern-agency-blog.lovable.app/logo.png",
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+1-555-123-4567",
@@ -96,7 +98,22 @@ const Home = () => {
       "https://facebook.com/nextleveldesign",
       "https://twitter.com/nextleveldesign",
       "https://linkedin.com/company/nextleveldesign"
-    ]
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "New York",
+      "addressRegion": "NY",
+      "addressCountry": "US"
+    }
+  };
+
+  const webPageStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Next.Level.Design - Transform Your Business with Digital Excellence",
+    "description": "Leading digital marketing agency specializing in web design, SEO, and growth strategies. Join 500+ companies that trust us to elevate their digital presence.",
+    "url": "https://preview--modern-agency-blog.lovable.app",
+    "mainEntity": organizationStructuredData
   };
 
   return (
@@ -105,10 +122,11 @@ const Home = () => {
         title="Next.Level.Design - Transform Your Business with Digital Excellence"
         description="Leading digital marketing agency specializing in web design, SEO, and growth strategies. Join 500+ companies that trust us to elevate their digital presence."
         keywords="digital marketing agency, web design, SEO optimization, digital transformation, online marketing, website development"
-        structuredData={structuredData}
+        structuredData={webPageStructuredData}
       />
+      <JsonLd data={organizationStructuredData} />
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center bg-gradient-hero overflow-hidden">
+      <section className="relative min-h-screen flex items-center bg-gradient-hero overflow-hidden" role="banner" aria-label="Hero section">
         <div className="absolute inset-0 bg-black/20" />
         
         {/* Enhanced animated background elements */}
@@ -165,13 +183,19 @@ const Home = () => {
             
             <ScrollReveal direction="right" delay={400}>
               <div className="relative group">
-                <LazyImage 
-                  src={heroImage} 
-                  alt="Digital marketing analytics dashboard showing performance metrics and growth charts"
-                  className="rounded-lg shadow-floating transform rotate-2 group-hover:rotate-0 transition-all duration-500 hover:scale-105"
-                  width={600}
-                  height={400}
-                />
+                {/* Responsive WebP hero image with priority loading */}
+                <picture>
+                  <source srcSet={heroBannerWebP} type="image/webp" />
+                  <img 
+                    src={heroImage}
+                    alt="Digital marketing analytics dashboard showing performance metrics and growth charts"
+                    className="rounded-lg shadow-floating transform rotate-2 group-hover:rotate-0 transition-all duration-500 hover:scale-105 w-full h-auto"
+                    width={600}
+                    height={400}
+                    fetchPriority="high"
+                    loading="eager"
+                  />
+                </picture>
                 <div className="absolute -top-4 -left-4 w-72 h-48 bg-gradient-card backdrop-blur-sm rounded-lg border border-white/20 p-6 animate-float">
                   <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
                     <TrendingUp className="h-5 w-5 text-primary-glow" />
@@ -192,7 +216,7 @@ const Home = () => {
       </section>
 
       {/* Stats Section with Enhanced Animations */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white" role="region" aria-label="Company statistics">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -213,7 +237,7 @@ const Home = () => {
       </section>
 
       {/* Services Preview */}
-      <section className="py-20 bg-gray-50 relative overflow-hidden">
+      <section className="py-20 bg-gray-50 relative overflow-hidden" role="region" aria-label="Our services">
         <FloatingElements count={4} className="opacity-30" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ScrollReveal direction="up">
@@ -265,7 +289,7 @@ const Home = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white" role="region" aria-label="Client testimonials">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal direction="up">
             <div className="text-center mb-16">
@@ -302,7 +326,7 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-hero-alt relative overflow-hidden">
+      <section className="py-20 bg-gradient-hero-alt relative overflow-hidden" role="region" aria-label="Call to action">
         <FloatingElements count={6} />
         <div className="absolute inset-0">
           <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse-slow" />

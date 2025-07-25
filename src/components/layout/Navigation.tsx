@@ -39,9 +39,11 @@ const Navigation = () => {
       isScrolled 
         ? 'bg-white/95 backdrop-blur-md shadow-card border-b border-border' 
         : 'bg-white/90 backdrop-blur-sm border-b border-border/50'
-    }`}>
+    }`} role="navigation" aria-label="Main navigation">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className={`flex justify-between items-center transition-all duration-300 ${
+          isScrolled ? 'h-16 transform scale-95' : 'h-20'
+        }`}>
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">

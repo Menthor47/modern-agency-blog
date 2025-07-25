@@ -15,7 +15,7 @@ import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./scrolltotop";
-import CoreWebVitals from "@/components/ui/core-web-vitals";
+import PerformanceMonitor from "@/components/ui/performance-monitor";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +23,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="light" storageKey="nextlevel-theme">
       <TooltipProvider>
-        <CoreWebVitals />
+      <PerformanceMonitor />
         <Toaster />
         <Sonner />
         <BrowserRouter>
