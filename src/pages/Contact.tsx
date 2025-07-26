@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useLocation } from "react-router-dom";
 import { smoothScrollToElement } from "@/utils/scrollUtils";
-import EnhancedForm from "@/components/ui/enhanced-form";
+import { FormField, SectionHeading } from "@/components/ui/enhanced-form";
 import SEOHead from "@/components/ui/seo-head";
 
 const Contact = () => {
@@ -176,10 +176,106 @@ const Contact = () => {
                   </p>
                 </CardHeader>
                 <CardContent>
-                  <EnhancedForm 
-                    onSubmit={handleFormSubmit}
-                    services={services}
-                  />
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <FormField
+                        label="Full Name"
+                        id="name"
+                        required
+                        className="w-full"
+                      >
+                        <Input
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                          className="text-text-primary"
+                        />
+                      </FormField>
+                      
+                      <FormField
+                        label="Email Address"
+                        id="email"
+                        type="email"
+                        required
+                        className="w-full"
+                      >
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                          className="text-text-primary"
+                        />
+                      </FormField>
+                    </div>
+                    
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <FormField
+                        label="Company"
+                        id="company"
+                        className="w-full"
+                      >
+                        <Input
+                          id="company"
+                          name="company"
+                          value={formData.company}
+                          onChange={handleChange}
+                          className="text-text-primary"
+                        />
+                      </FormField>
+                      
+                      <FormField
+                        label="Service Interested In"
+                        id="service"
+                        className="w-full"
+                      >
+                        <select
+                          id="service"
+                          name="service"
+                          value={formData.service}
+                          onChange={handleChange}
+                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-text-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        >
+                          <option value="">Select a service</option>
+                          {services.map((service) => (
+                            <option key={service} value={service}>
+                              {service}
+                            </option>
+                          ))}
+                        </select>
+                      </FormField>
+                    </div>
+                    
+                    <FormField
+                      label="Project Details"
+                      id="message"
+                      required
+                    >
+                      <Textarea
+                        id="message"
+                        name="message"
+                        placeholder="Tell us about your project, goals, and timeline..."
+                        rows={5}
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                        className="text-text-primary resize-none"
+                      />
+                    </FormField>
+                    
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-primary hover:bg-primary/90 text-white font-medium"
+                      size="lg"
+                    >
+                      <Send className="mr-2 h-4 w-4" />
+                      Send Message
+                    </Button>
+                  </form>
                 </CardContent>
               </Card>
             </div>

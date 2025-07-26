@@ -20,10 +20,10 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'heading': ['Poppins', 'system-ui', 'sans-serif'],
-				'body': ['Lora', 'Georgia', 'serif'],
-				'sans': ['Poppins', 'system-ui', 'sans-serif'],
-				'serif': ['Lora', 'Georgia', 'serif'],
+				'heading': ['Playfair Display', 'serif'],
+				'body': ['Inter', 'system-ui', 'sans-serif'],
+				'sans': ['Inter', 'system-ui', 'sans-serif'],
+				'serif': ['Playfair Display', 'serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -73,6 +73,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				text: {
+					primary: 'hsl(var(--text-primary))',
+					secondary: 'hsl(var(--text-secondary))',
+					muted: 'hsl(var(--text-muted))',
+					'high-contrast': 'hsl(var(--text-high-contrast))'
 				}
 			},
 			backgroundImage: {
@@ -95,6 +101,21 @@ export default {
 				'slide-in-right': 'slideInRight 0.6s ease-out',
 				'float': 'float 6s ease-in-out infinite',
 				'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+			},
+			fontSize: {
+				'xs': ['0.75rem', { lineHeight: '1.4', letterSpacing: '0.025em' }],
+				'sm': ['0.875rem', { lineHeight: '1.5', letterSpacing: '0.01em' }],
+				'base': ['1rem', { lineHeight: '1.6', letterSpacing: '0' }],
+				'lg': ['1.125rem', { lineHeight: '1.6', letterSpacing: '-0.005em' }],
+				'xl': ['1.25rem', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
+				'2xl': ['1.5rem', { lineHeight: '1.4', letterSpacing: '-0.015em' }],
+				'3xl': ['1.875rem', { lineHeight: '1.3', letterSpacing: '-0.02em' }],
+				'4xl': ['2.25rem', { lineHeight: '1.2', letterSpacing: '-0.025em' }],
+				'5xl': ['3rem', { lineHeight: '1.1', letterSpacing: '-0.03em' }],
+				'6xl': ['3.75rem', { lineHeight: '1', letterSpacing: '-0.035em' }],
+				'7xl': ['4.5rem', { lineHeight: '1', letterSpacing: '-0.04em' }],
+				'8xl': ['6rem', { lineHeight: '1', letterSpacing: '-0.045em' }],
+				'9xl': ['8rem', { lineHeight: '1', letterSpacing: '-0.05em' }],
 			},
 			transitionTimingFunction: {
 				'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
