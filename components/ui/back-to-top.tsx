@@ -54,9 +54,7 @@ const BackToTop = () => {
         <Button
           onClick={scrollToTop}
           size="icon"
-          className="absolute inset-1 rounded-full bg-white shadow-floating hover:shadow-glow hover:scale-110 transition-all duration-300"
-          aria-label="Back to top"
-        >
+          className="absolute inset-1 rounded-full bg-primary shadow-floating hover:shadow-glow hover:scale-110 transition-all duration-300"        >
           <ArrowUp className="h-4 w-4" />
         </Button>
       </div>
