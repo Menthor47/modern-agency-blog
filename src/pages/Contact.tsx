@@ -1,408 +1,280 @@
-import { useState, useEffect } from "react";
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { useLocation } from "react-router-dom";
-import { smoothScrollToElement } from "@/utils/scrollUtils";
-import { FormField, SectionHeading } from "@/components/ui/enhanced-form";
-import SEOHead from "@/components/ui/seo-head";
+import { 
+  MapPin, 
+  Phone, 
+  Mail, 
+  Clock,
+  Twitter,
+  Linkedin,
+  Instagram,
+  Send
+} from "lucide-react";
 
 const Contact = () => {
   const { toast } = useToast();
-  const location = useLocation();
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     company: "",
-    service: "",
+    email: "",
+    budget: "",
+    project: "",
     message: ""
   });
 
-  // Pre-fill service if passed from another page
-  useEffect(() => {
-    if (location.state?.selectedService) {
-      setFormData(prev => ({
-        ...prev,
-        service: location.state.selectedService
-      }));
-    }
-  }, [location.state]);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
+    
+    // Simulate form submission
     toast({
       title: "Message Sent!",
-      description: "Thank you for your message. We'll get back to you within 24 hours.",
+      description: "We'll get back to you within 24 hours.",
     });
-    setFormData({ name: "", email: "", company: "", service: "", message: "" });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    
+    // Reset form
     setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+      name: "",
+      company: "",
+      email: "",
+      budget: "",
+      project: "",
+      message: ""
     });
   };
 
-  const handleScrollToForm = () => {
-    smoothScrollToElement('contact-form');
+  const handleChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   const contactInfo = [
     {
-      icon: Mail,
-      title: "Email Us",
-      details: "hello@nextleveldesign.com",
-      description: "Send us an email anytime"
+      icon: <MapPin className="h-6 w-6 text-secondary" />,
+      title: "Our Office",
+      details: ["123 Design Street", "Creative District", "San Francisco, CA 94102"]
     },
     {
-      icon: Phone,
-      title: "Call Us",
-      details: "+1 (555) 123-4567",
-      description: "Mon-Fri from 8am to 5pm EST"
+      icon: <Phone className="h-6 w-6 text-secondary" />,
+      title: "Phone",
+      details: ["+1 (555) 123-4567", "+1 (555) 987-6543"]
     },
     {
-      icon: MapPin,
-      title: "Visit Us",
-      details: "123 Digital Ave, Tech City, TC 12345",
-      description: "Our headquarters"
+      icon: <Mail className="h-6 w-6 text-secondary" />,
+      title: "Email",
+      details: ["hello@nextleveldesign.com", "support@nextleveldesign.com"]
     },
     {
-      icon: Clock,
-      title: "Response Time",
-      details: "< 24 hours",
-      description: "We respond to all inquiries quickly"
+      icon: <Clock className="h-6 w-6 text-secondary" />,
+      title: "Business Hours",
+      details: ["Monday - Friday: 9:00 AM - 6:00 PM", "Saturday: 10:00 AM - 4:00 PM", "Sunday: Closed"]
     }
   ];
 
-  const services = [
-    "Web Design & Development",
-    "Digital Marketing",
-    "SEO Optimization",
-    "Brand Strategy",
-    "Custom Development",
-    "Analytics & Reporting",
-    "Other"
+  const socialLinks = [
+    { icon: <Twitter className="h-5 w-5" />, name: "Twitter", url: "#" },
+    { icon: <Linkedin className="h-5 w-5" />, name: "LinkedIn", url: "#" },
+    { icon: <Instagram className="h-5 w-5" />, name: "Instagram", url: "#" }
   ];
 
-  const handleFormSubmit = async (data: any) => {
-    // Here you would integrate with your form service
-    console.log('Form submitted:', data);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-  };
-
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    "name": "Contact Next.Level.Design",
-    "description": "Get in touch with our digital marketing experts for a free consultation",
-    "url": "https://nextleveldesign.com/contact"
-  };
-
   return (
-    <div className="min-h-screen pt-20">
-      <SEOHead
-        title="Contact Us - Next.Level.Design Digital Marketing Agency"
-        description="Ready to transform your digital presence? Contact our expert team for a free consultation and custom strategy that drives real results."
-        structuredData={structuredData}
-      />
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-hero">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold text-white mb-6">
+      <section className="py-20 bg-gradient-to-r from-primary to-secondary">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="font-heading text-4xl md:text-6xl font-bold text-white neon-glow mb-6 animate-fade-in">
             Get In Touch
           </h1>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
-            Ready to transform your digital presence? Let's discuss your project and 
-            create a strategy that drives real results for your business.
+          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto animate-slide-in-left">
+            Ready to transform your digital presence? Let's discuss your project and bring your vision to life.
           </p>
-          <Button 
-            variant="hero-outline" 
-            size="lg"
-            onClick={handleScrollToForm}
-            className="hover:scale-105 transition-transform duration-300"
-          >
-            Get Started Now
-          </Button>
         </div>
       </section>
 
-      {/* Contact Info Cards */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {contactInfo.map((info, index) => (
-              <Card key={index} className="text-center border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardContent className="p-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-primary rounded-lg mb-4">
-                    <info.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="font-semibold text-foreground mb-2">{info.title}</h3>
-                  <p className="text-lg font-medium text-primary mb-1">{info.details}</p>
-                  <p className="text-sm text-muted-foreground">{info.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form & Map */}
-      <section id="contact-form" className="py-20 bg-gray-50 scroll-mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
-              Let's Start Your Project
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Fill out the form below and we'll get back to you within 24 hours with a custom strategy for your business.
-            </p>
-          </div>
-          
-          <div className="grid lg:grid-cols-3 gap-12">
+      {/* Contact Form & Info */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <div className="lg:col-span-2">
-              <Card className="border-0 shadow-xl">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-foreground">Send Us a Message</CardTitle>
-                  <p className="text-muted-foreground">
-                    Fill out the form below and we'll get back to you within 24 hours.
-                  </p>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <FormField
-                        label="Full Name"
+            <Card className="shadow-elegant">
+              <CardHeader>
+                <CardTitle className="font-heading text-2xl text-primary">
+                  Start Your Project
+                </CardTitle>
+                <p className="text-muted-foreground">
+                  Fill out the form below and we'll get back to you within 24 hours.
+                </p>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Name *</Label>
+                      <Input
                         id="name"
+                        value={formData.name}
+                        onChange={(e) => handleChange("name", e.target.value)}
                         required
-                        className="w-full"
-                      >
-                        <Input
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          required
-                          className="text-text-primary"
-                        />
-                      </FormField>
-                      
-                      <FormField
-                        label="Email Address"
-                        id="email"
-                        type="email"
-                        required
-                        className="w-full"
-                      >
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          required
-                          className="text-text-primary"
-                        />
-                      </FormField>
-                    </div>
-                    
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <FormField
-                        label="Company"
-                        id="company"
-                        className="w-full"
-                      >
-                        <Input
-                          id="company"
-                          name="company"
-                          value={formData.company}
-                          onChange={handleChange}
-                          className="text-text-primary"
-                        />
-                      </FormField>
-                      
-                      <FormField
-                        label="Service Interested In"
-                        id="service"
-                        className="w-full"
-                      >
-                        <select
-                          id="service"
-                          name="service"
-                          value={formData.service}
-                          onChange={handleChange}
-                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-text-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                        >
-                          <option value="">Select a service</option>
-                          {services.map((service) => (
-                            <option key={service} value={service}>
-                              {service}
-                            </option>
-                          ))}
-                        </select>
-                      </FormField>
-                    </div>
-                    
-                    <FormField
-                      label="Project Details"
-                      id="message"
-                      required
-                    >
-                      <Textarea
-                        id="message"
-                        name="message"
-                        placeholder="Tell us about your project, goals, and timeline..."
-                        rows={5}
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        className="text-text-primary resize-none"
+                        placeholder="Your full name"
                       />
-                    </FormField>
-                    
-                    <Button 
-                      type="submit" 
-                      className="w-full bg-primary hover:bg-primary/90 text-white font-medium"
-                      size="lg"
-                    >
-                      <Send className="mr-2 h-4 w-4" />
-                      Send Message
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="company">Company</Label>
+                      <Input
+                        id="company"
+                        value={formData.company}
+                        onChange={(e) => handleChange("company", e.target.value)}
+                        placeholder="Company name"
+                      />
+                    </div>
+                  </div>
 
-            {/* Sidebar with Map & Additional Info */}
-            <div className="space-y-8">
-              <Card className="border-0 shadow-xl">
-                <CardContent className="p-0">
-                  <div className="h-64 bg-gray-200 rounded-t-lg relative overflow-hidden">
-                    <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387190.2799160891!2d-74.25987368715491!3d40.697670063849574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
-                      className="w-full h-full border-0"
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title="Office Location"
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => handleChange("email", e.target.value)}
+                      required
+                      placeholder="your@email.com"
                     />
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-lg font-semibold text-foreground mb-2">Visit Our Office</h3>
-                    <p className="text-muted-foreground text-sm">
-                      Located in the heart of Tech City, our office is easily accessible 
-                      and we welcome visitors by appointment.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
 
-              <Card className="border-0 shadow-xl">
-                <CardHeader>
-                  <CardTitle>Why Choose Us?</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-medium text-foreground">Fast Response Time</h4>
-                      <p className="text-sm text-muted-foreground">We respond to all inquiries within 24 hours</p>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="budget">Project Budget</Label>
+                      <Select onValueChange={(value) => handleChange("budget", value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select budget range" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="under-5k">Under $5,000</SelectItem>
+                          <SelectItem value="5k-10k">$5,000 - $10,000</SelectItem>
+                          <SelectItem value="10k-25k">$10,000 - $25,000</SelectItem>
+                          <SelectItem value="25k-50k">$25,000 - $50,000</SelectItem>
+                          <SelectItem value="over-50k">Over $50,000</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="project">Project Type</Label>
+                      <Select onValueChange={(value) => handleChange("project", value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select project type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="branding">Branding & Identity</SelectItem>
+                          <SelectItem value="web-dev">Web Development</SelectItem>
+                          <SelectItem value="ux-ui">UX/UI Design</SelectItem>
+                          <SelectItem value="marketing">Digital Marketing</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
-                  <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-medium text-foreground">Free Consultation</h4>
-                      <p className="text-sm text-muted-foreground">Initial strategy session at no cost</p>
-                    </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Project Details *</Label>
+                    <Textarea
+                      id="message"
+                      value={formData.message}
+                      onChange={(e) => handleChange("message", e.target.value)}
+                      required
+                      placeholder="Tell us about your project, goals, and timeline..."
+                      rows={5}
+                    />
                   </div>
-                  <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-medium text-foreground">Proven Results</h4>
-                      <p className="text-sm text-muted-foreground">500+ successful projects completed</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-medium text-foreground">Dedicated Support</h4>
-                      <p className="text-sm text-muted-foreground">Ongoing support throughout your project</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+
+                  <Button type="submit" variant="hero" size="lg" className="w-full">
+                    <Send className="h-4 w-4 mr-2" />
+                    Send Message
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+
+            {/* Contact Information */}
+            <div className="space-y-8">
+              <div>
+                <h2 className="font-heading text-3xl font-bold text-primary mb-6">
+                  Let's Connect
+                </h2>
+                <p className="text-lg text-muted-foreground mb-8">
+                  We're always excited to hear about new projects and challenges. 
+                  Reach out through any of the channels below.
+                </p>
+              </div>
+
+              <div className="grid gap-6">
+                {contactInfo.map((info, index) => (
+                  <Card key={index} className="border-0 shadow-elegant">
+                    <CardContent className="p-6">
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0 mt-1">{info.icon}</div>
+                        <div>
+                          <h3 className="font-heading font-semibold text-lg mb-2">
+                            {info.title}
+                          </h3>
+                          {info.details.map((detail, detailIndex) => (
+                            <p key={detailIndex} className="text-muted-foreground">
+                              {detail}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              {/* Social Links */}
+              <div>
+                <h3 className="font-heading text-xl font-semibold mb-4">Follow Us</h3>
+                <div className="flex space-x-4">
+                  {socialLinks.map((social, index) => (
+                    <a
+                      key={index}
+                      href={social.url}
+                      className="w-12 h-12 bg-secondary text-secondary-foreground rounded-lg flex items-center justify-center hover:bg-secondary/80 transition-smooth"
+                      aria-label={social.name}
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
-              Frequently Asked Questions
+      {/* Map Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="font-heading text-3xl font-bold text-primary mb-4">
+              Visit Our Office
             </h2>
-            <p className="text-xl text-muted-foreground">
-              Get answers to common questions about our services and process.
+            <p className="text-lg text-muted-foreground">
+              Located in the heart of San Francisco's creative district.
             </p>
           </div>
           
-          <div className="space-y-6">
-            {[
-              {
-                question: "How long does a typical project take?",
-                answer: "Project timelines vary depending on scope and complexity. Most websites take 4-8 weeks, while comprehensive digital marketing campaigns can take 2-3 months to fully implement."
-              },
-              {
-                question: "Do you provide ongoing support after launch?",
-                answer: "Absolutely! We offer various support packages including maintenance, updates, monitoring, and continued optimization to ensure your digital presence continues to perform at its best."
-              },
-              {
-                question: "What makes you different from other agencies?",
-                answer: "Our focus on measurable results, transparent communication, and long-term partnerships sets us apart. We don't just deliver projects – we deliver growth and success for your business."
-              },
-              {
-                question: "Can you work with our existing team?",
-                answer: "Yes! We often collaborate with in-house teams and can adapt our services to complement your existing resources and workflows."
-              }
-            ].map((faq, index) => (
-              <Card key={index} className="border-0 shadow-md">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold text-foreground mb-3">{faq.question}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                </CardContent>
-              </Card>
-            ))}
+          {/* Placeholder for map - in a real project, you'd integrate with Google Maps */}
+          <div className="bg-muted rounded-lg h-96 flex items-center justify-center shadow-elegant">
+            <div className="text-center">
+              <MapPin className="h-12 w-12 text-secondary mx-auto mb-4" />
+              <p className="text-lg font-heading font-semibold">Interactive Map</p>
+              <p className="text-muted-foreground">
+                123 Design Street, Creative District, San Francisco, CA 94102
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-hero-alt">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Let's Start Your Success Story
-          </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Don't wait to transform your digital presence. Contact us today and let's discuss how we can help your business thrive.
-          </p>
-          <Button 
-            variant="secondary" 
-            size="lg" 
-            className="bg-white text-accent-red hover:bg-white/90"
-            onClick={handleScrollToForm}
-          >
-            Get Your Free Audit
-          </Button>
         </div>
       </section>
     </div>

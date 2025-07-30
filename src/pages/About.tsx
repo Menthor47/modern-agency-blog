@@ -1,166 +1,96 @@
-
-import { Users, Target, Lightbulb, Award } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Users, Target, Lightbulb, Award } from "lucide-react";
+import cyberTeamOffice from "@/assets/cyber-team-office.jpg";
 
 const About = () => {
-  const navigate = useNavigate();
-
-  const handleStartProject = () => {
-    navigate('/contact');
-  };
-
   const values = [
     {
-      icon: Target,
-      title: "Results-Driven",
-      description: "We measure success by your success. Every strategy is designed to deliver measurable results that drive your business forward."
+      icon: <Target className="h-8 w-8 text-secondary" />,
+      title: "Mission-Driven",
+      description: "We turn innovative ideas into digital experiences that drive real business results."
     },
     {
-      icon: Lightbulb,
-      title: "Innovation First",
-      description: "We stay ahead of the curve with cutting-edge technologies and creative solutions that set you apart from the competition."
-    },
-    {
-      icon: Users,
+      icon: <Users className="h-8 w-8 text-secondary" />,
       title: "Client-Centric",
-      description: "Your goals become our goals. We work as an extension of your team to ensure your vision becomes reality."
+      description: "Your success is our priority. We build long-lasting partnerships with every client."
     },
     {
-      icon: Award,
-      title: "Excellence Always",
-      description: "We never settle for good enough. Our commitment to excellence ensures every project exceeds expectations."
+      icon: <Lightbulb className="h-8 w-8 text-secondary" />,
+      title: "Innovation First",
+      description: "We stay ahead of trends to deliver cutting-edge solutions for tomorrow's challenges."
+    },
+    {
+      icon: <Award className="h-8 w-8 text-secondary" />,
+      title: "Quality Assured",
+      description: "Every project meets our rigorous standards for excellence and performance."
     }
   ];
 
   const team = [
     {
-      name: "Sarah Johnson",
-      position: "Founder & CEO",
-      bio: "10+ years of experience in digital marketing and business strategy. Led campaigns for Fortune 500 companies.",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b77c?w=400&h=400&fit=crop&crop=face"
+      name: "Sarah Chen",
+      role: "Creative Director",
+      bio: "With 8+ years in digital design, Sarah leads our creative vision and ensures every project tells a compelling story.",
+      skills: ["Brand Strategy", "UX Design", "Creative Leadership"]
     },
     {
-      name: "Mike Chen",
-      position: "Head of Development",
-      bio: "Full-stack developer with expertise in modern web technologies. Built scalable solutions for startups and enterprises.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face"
+      name: "Marcus Rodriguez",
+      role: "Lead Developer",
+      bio: "Marcus transforms designs into powerful web experiences using the latest technologies and best practices.",
+      skills: ["React", "Node.js", "Cloud Architecture"]
     },
     {
-      name: "Emily Rodriguez",
-      position: "Creative Director",
-      bio: "Award-winning designer with a passion for creating memorable brand experiences that drive engagement.",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face"
-    },
-    {
-      name: "David Kim",
-      position: "Marketing Strategist",
-      bio: "Data-driven marketer specializing in ROI optimization and performance marketing across all digital channels.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+      name: "Elena Kowalski",
+      role: "Marketing Strategist",
+      bio: "Elena drives digital growth through data-driven marketing strategies that connect brands with their audiences.",
+      skills: ["SEO", "Analytics", "Content Strategy"]
     }
   ];
 
   const milestones = [
-    { year: "2019", event: "Company Founded", description: "Started with a vision to transform digital experiences" },
-    { year: "2020", event: "100+ Projects", description: "Reached our first major milestone of completed projects" },
-    { year: "2021", event: "Award Recognition", description: "Won 'Best Digital Agency' at Tech Innovation Awards" },
-    { year: "2022", event: "500+ Clients", description: "Expanded our client base across multiple industries" },
-    { year: "2023", event: "Global Expansion", description: "Opened offices in 3 new countries" },
-    { year: "2024", event: "Industry Leaders", description: "Recognized as top 1% of digital agencies worldwide" }
+    { year: "2019", event: "Founded NextLevelDesign with a vision to transform digital experiences" },
+    { year: "2020", event: "Launched our first major e-commerce platform, reaching 10M+ users" },
+    { year: "2021", event: "Expanded to serve Fortune 500 companies and international clients" },
+    { year: "2022", event: "Won 'Digital Agency of the Year' award for innovative design solutions" },
+    { year: "2023", event: "Achieved 98% client satisfaction rate and 150+ successful projects" },
+    { year: "2024", event: "Pioneering AI-powered design tools and sustainable web practices" }
   ];
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-hero">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-white">
-              <h1 className="text-5xl font-bold mb-6">
-                About Next.Level.Design
-              </h1>
-              <p className="text-xl text-white/90 mb-8 leading-relaxed">
-                We're not just another digital agency. We're your strategic partners in growth, 
-                dedicated to transforming ambitious businesses into industry leaders through 
-                innovative design and data-driven marketing strategies.
-              </p>
-              <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <div className="text-3xl font-bold text-primary-glow mb-2">500+</div>
-                  <div className="text-white/80">Projects Completed</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-primary-glow mb-2">5+</div>
-                  <div className="text-white/80">Years Experience</div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="relative">
-              <img 
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
-                alt="Our team working together"
-                className="rounded-lg shadow-2xl"
-              />
-            </div>
-          </div>
+      <section className="relative py-20 gradient-cyber overflow-hidden">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="font-heading text-4xl md:text-6xl font-bold text-foreground mb-6 animate-fade-in neon-glow">
+            About NextLevelDesign
+          </h1>
+          <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto animate-slide-in-left">
+            We're a team of passionate designers, developers, and strategists dedicated to creating digital experiences that drive growth and innovation.
+          </p>
         </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-3xl font-bold text-foreground mb-6">Our Mission</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                To empower businesses of all sizes with cutting-edge digital solutions that drive 
-                measurable growth. We believe every company deserves a competitive edge in the 
-                digital landscape, regardless of their starting point.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Through innovative design, strategic marketing, and robust development, we help 
-                our clients not just keep up with the digital revolution, but lead it.
-              </p>
-            </div>
-            
-            <div>
-              <h2 className="text-3xl font-bold text-foreground mb-6">Our Vision</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                To be the world's most trusted digital transformation partner, known for delivering 
-                exceptional results that exceed expectations and drive sustainable business growth.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                We envision a future where every business, from startups to enterprises, has access 
-                to world-class digital solutions that help them thrive in an increasingly connected world.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Mission & Values */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
-              Our Core Values
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-4 neon-glow">
+              Our Mission & Values
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              These principles guide everything we do and shape how we work with our clients.
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Building the future of digital experiences through innovation, collaboration, and excellence.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
-              <Card key={index} className="text-center border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardContent className="p-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-primary rounded-lg mb-4">
-                    <value.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-3">{value.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{value.description}</p>
+              <Card key={index} className="text-center group hover:shadow-neon transition-cyber glass-card">
+                <CardContent className="p-8">
+                  <div className="mb-4 flex justify-center">{value.icon}</div>
+                  <h3 className="font-heading text-xl font-semibold mb-3">{value.title}</h3>
+                  <p className="text-muted-foreground">{value.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -168,30 +98,42 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
-              Meet Our Team
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Behind every great project is an even greater team. Meet the experts who make it all happen.
-            </p>
+      {/* Team Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+            <div>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-6 neon-glow">
+                Meet Our Team
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                Our diverse team brings together expertise from design, development, and digital marketing to create exceptional results for our clients.
+              </p>
+              <Button variant="glass" size="lg">
+                Join Our Team
+              </Button>
+            </div>
+            <div className="relative">
+              <img 
+                src={cyberTeamOffice}
+                alt="NextLevelDesign team at work" 
+                className="rounded-lg shadow-neon w-full"
+              />
+            </div>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {team.map((member, index) => (
-              <Card key={index} className="text-center border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <Card key={index} className="hover:shadow-neon transition-cyber glass-card">
                 <CardContent className="p-6">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
-                  />
-                  <h3 className="text-lg font-semibold text-foreground mb-1">{member.name}</h3>
-                  <p className="text-primary font-medium mb-3">{member.position}</p>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{member.bio}</p>
+                  <h3 className="font-heading text-xl font-semibold mb-1 text-primary neon-glow">{member.name}</h3>
+                  <p className="text-secondary font-medium mb-3">{member.role}</p>
+                  <p className="text-muted-foreground mb-4">{member.bio}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {member.skills.map((skill, skillIndex) => (
+                      <Badge key={skillIndex} variant="secondary">{skill}</Badge>
+                    ))}
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -200,48 +142,32 @@ const About = () => {
       </section>
 
       {/* Timeline */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-4 neon-glow">
               Our Journey
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              From a small startup to an industry leader, here's how we've grown over the years.
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              From startup to industry leader, here's how we've grown and evolved.
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <div className="max-w-4xl mx-auto">
             {milestones.map((milestone, index) => (
-              <Card key={index} className="border-0 shadow-lg">
-                <CardContent className="p-6">
-                  <div className="text-2xl font-bold text-primary mb-2">{milestone.year}</div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">{milestone.event}</h3>
-                  <p className="text-muted-foreground text-sm">{milestone.description}</p>
-                </CardContent>
-              </Card>
+              <div key={index} className="flex items-start mb-8 last:mb-0 group">
+                <div className="flex-shrink-0 w-20 text-right mr-8">
+                  <span className="font-heading font-bold text-secondary text-lg group-hover:neon-glow">
+                    {milestone.year}
+                  </span>
+                </div>
+                <div className="flex-shrink-0 w-4 h-4 rounded-full bg-primary mt-2 mr-8 group-hover:animate-neon-pulse shadow-neon"></div>
+                <div className="flex-1">
+                  <p className="text-foreground">{milestone.event}</p>
+                </div>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-hero-alt">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Ready to Work Together?
-          </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Let's create something extraordinary together. Join hundreds of satisfied clients who trust us with their digital success.
-          </p>
-          <Button 
-            variant="secondary" 
-            size="lg" 
-            className="bg-white text-accent-red hover:bg-white/90"
-            onClick={handleStartProject}
-          >
-            Start Your Project
-          </Button>
         </div>
       </section>
     </div>
