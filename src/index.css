@@ -54,7 +54,7 @@ All colors MUST be HSL.
     --gradient-hero: linear-gradient(135deg, hsl(212, 49%, 47%), hsl(9, 73%, 49%));
     --gradient-hero-alt: linear-gradient(135deg, hsl(var(--accent-red)), hsl(var(--secondary)));
     --gradient-card: linear-gradient(145deg, hsl(49, 65%, 93%, 0.1), hsl(33, 54%, 79%, 0.05));
-    --gradient-subtle: linear-gradient(145deg, hsl(49, 65%, 93%, 0.8), hsl(33, 54%, 79%, 0.4));
+    --gradient-subtle: linear-gradient(145deg, hsl(138, 41%, 75%), hsl(32, 53%, 69%));
     
     /* Shadows */
     --shadow-elegant: 0 20px 50px -10px hsl(var(--primary) / 0.3);
@@ -115,11 +115,11 @@ All colors MUST be HSL.
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border;
   }
 
   body {
-    @apply text-foreground bg-background;
+    @apply text-foreground;
     background: var(--gradient-subtle);
     min-height: 100vh;
     color: hsl(var(--text-primary));
@@ -464,7 +464,7 @@ All colors MUST be HSL.
   --color-surface: #23272f;
   --color-primary: #818cf8;
   --color-accent: #fbbf24;
-  --color-text: #f9fafb;
+  --color-text: #9dc4df;
   --color-muted: #d1d5db;
   --color-border: #374151;
 }
