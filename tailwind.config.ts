@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -20,22 +19,43 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'heading': ['Playfair Display', 'serif'],
-				'body': ['Inter', 'system-ui', 'sans-serif'],
-				'sans': ['Inter', 'system-ui', 'sans-serif'],
-				'serif': ['Playfair Display', 'serif'],
+				'heading': ['Poppins', 'serif'],
+				'body': ['Roboto', 'system-ui', 'sans-serif'],
+				'sans': ['Roboto', 'system-ui', 'sans-serif'],
+				'serif': ['Poppins', 'serif'],
 			},
 			colors: {
-				border: 'hsl(var(--border))',
+				background: {
+					light: '#f9fafb',
+					dark: '#18181b',
+				},
+				surface: {
+					light: '#ffffff',
+					dark: '#23272f',
+				},
+				primary: {
+					light: '#6366f1',
+					dark: '#818cf8',
+				},
+				accent: {
+					light: '#f59e42',
+					dark: '#fbbf24',
+				},
+				text: {
+					light: '#18181b',
+					dark: '#f9fafb',
+				},
+				muted: {
+					light: '#6b7280',
+					dark: '#d1d5db',
+				},
+				border: {
+					light: '#e5e7eb',
+					dark: '#374151',
+				},
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
-				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
-				primary: {
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))',
-					glow: 'hsl(var(--primary-glow))'
-				},
 				'accent-red': {
 					DEFAULT: 'hsl(var(--accent-red))',
 					glow: 'hsl(var(--accent-red-glow))'
@@ -47,14 +67,6 @@ export default {
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))'
-				},
-				muted: {
-					DEFAULT: 'hsl(var(--muted))',
-					foreground: 'hsl(var(--muted-foreground))'
-				},
-				accent: {
-					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -73,12 +85,6 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				},
-				text: {
-					primary: 'hsl(var(--text-primary))',
-					secondary: 'hsl(var(--text-secondary))',
-					muted: 'hsl(var(--text-muted))',
-					'high-contrast': 'hsl(var(--text-high-contrast))'
 				}
 			},
 			backgroundImage: {
@@ -101,6 +107,8 @@ export default {
 				'slide-in-right': 'slideInRight 0.6s ease-out',
 				'float': 'float 6s ease-in-out infinite',
 				'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+				'accordion-down': 'accordion-down 0.2s ease-out',
+				'accordion-up': 'accordion-up 0.2s ease-out'
 			},
 			fontSize: {
 				'xs': ['0.75rem', { lineHeight: '1.4', letterSpacing: '0.025em' }],
@@ -192,10 +200,7 @@ export default {
 					}
 				}
 			},
-			animation: {
-				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
