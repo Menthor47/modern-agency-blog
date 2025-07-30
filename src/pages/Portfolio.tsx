@@ -1,219 +1,199 @@
-
-import { ExternalLink, Award } from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useNavigate } from "react-router-dom";
+import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Link } from "react-router-dom";
+import { ExternalLink, Eye } from "lucide-react";
 
 const Portfolio = () => {
-  const navigate = useNavigate();
+  const [activeFilter, setActiveFilter] = useState("All");
 
-  const handleStartProject = () => {
-    navigate('/contact');
-  };
-
-  const handleViewProject = (projectTitle: string) => {
-    // For demo purposes, show an alert with project info
-    alert(`${projectTitle} - This would normally open the live project or case study details.`);
-  };
+  const filters = ["All", "Branding", "Web Development", "UX/UI Design", "E-commerce"];
 
   const projects = [
     {
-      title: "TechStart Solutions",
-      category: "SaaS Platform",
-      description: "Complete brand redesign and web development for a growing tech startup, resulting in 400% increase in conversions.",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop",
-      results: "+400% Conversions",
-      tags: ["Web Design", "Branding", "Development"]
+      id: 1,
+      title: "EcoTech Solutions",
+      category: "Branding",
+      client: "Green Energy Startup",
+      description: "Complete brand identity and website design for a sustainable technology company.",
+      fullDescription: "EcoTech Solutions needed a modern brand identity that would communicate their commitment to sustainable technology. We created a comprehensive brand system including logo design, color palette, typography, and brand guidelines. The project also included a responsive website design that showcases their innovative products and environmental impact.",
+      tags: ["Logo Design", "Brand Guidelines", "Website"],
+      image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=600&fit=crop",
+      results: ["40% increase in brand recognition", "60% more qualified leads", "95% client satisfaction"]
     },
     {
-      title: "EcoLife Marketplace",
+      id: 2,
+      title: "FinanceFlow App",
+      category: "UX/UI Design",
+      client: "Financial Services",
+      description: "Mobile app design for a personal finance management platform.",
+      fullDescription: "FinanceFlow required a user-friendly mobile application that would simplify personal finance management. Through extensive user research and iterative design, we created an intuitive interface that makes complex financial data accessible and actionable for everyday users.",
+      tags: ["Mobile Design", "User Research", "Prototyping"],
+      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop",
+      results: ["4.8/5 app store rating", "250k+ downloads in 6 months", "30% reduction in support tickets"]
+    },
+    {
+      id: 3,
+      title: "Urban Threads",
       category: "E-commerce",
-      description: "Full-scale e-commerce platform with advanced filtering, payment integration, and inventory management.",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop",
-      results: "+250% Sales",
-      tags: ["E-commerce", "UX/UI", "SEO"]
+      client: "Fashion Retailer",
+      description: "Complete e-commerce platform for a contemporary fashion brand.",
+      fullDescription: "Urban Threads needed a modern e-commerce platform that would reflect their contemporary fashion aesthetic while providing a seamless shopping experience. We built a custom Shopify solution with advanced filtering, wishlist functionality, and integrated inventory management.",
+      tags: ["E-commerce", "Shopify", "Custom Development"],
+      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
+      results: ["150% increase in online sales", "45% higher conversion rate", "65% mobile traffic improvement"]
     },
     {
-      title: "MedCare Professionals",
-      category: "Healthcare",
-      description: "Modern healthcare platform with patient portal, appointment booking, and telehealth capabilities.",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=600&fit=crop",
-      results: "+180% Patients",
-      tags: ["Healthcare", "Portal Development", "Security"]
+      id: 4,
+      title: "TechCorp Website",
+      category: "Web Development",
+      client: "Technology Company",
+      description: "Corporate website redesign with advanced features and CMS integration.",
+      fullDescription: "TechCorp needed a complete website overhaul that would position them as industry leaders. We developed a modern, responsive website with custom animations, integrated blog, career portal, and advanced contact forms. The site was built with performance and SEO optimization in mind.",
+      tags: ["React", "CMS", "SEO Optimization"],
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+      results: ["200% increase in organic traffic", "85% faster page load times", "50% more contact form submissions"]
     },
     {
-      title: "FinanceForward",
-      category: "Financial Services",
-      description: "Comprehensive financial planning platform with real-time analytics and investment tracking.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-      results: "+320% Users",
-      tags: ["Fintech", "Analytics", "Security"]
+      id: 5,
+      title: "Wellness Co. Rebrand",
+      category: "Branding",
+      client: "Health & Wellness",
+      description: "Brand refresh and digital strategy for a wellness company.",
+      fullDescription: "Wellness Co. sought to modernize their brand to appeal to a younger, health-conscious demographic. We developed a fresh visual identity, updated their messaging strategy, and created a comprehensive digital presence across web and social media platforms.",
+      tags: ["Rebranding", "Social Media", "Content Strategy"],
+      image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop",
+      results: ["300% social media engagement increase", "120% website traffic growth", "80% brand recall improvement"]
     },
     {
-      title: "FoodieConnect",
-      category: "Food & Beverage",
-      description: "Social dining platform connecting food enthusiasts with local restaurants and experiences.",
-      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop",
-      results: "+500% Engagement",
-      tags: ["Social Platform", "Mobile App", "Marketing"]
-    },
-    {
-      title: "EduTech Academy",
-      category: "Education",
-      description: "Online learning platform with interactive courses, progress tracking, and certification system.",
-      image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&h=600&fit=crop",
-      results: "+290% Enrollments",
-      tags: ["EdTech", "LMS", "Interactive Design"]
+      id: 6,
+      title: "RestaurantPro Dashboard",
+      category: "UX/UI Design",
+      client: "Restaurant Chain",
+      description: "Management dashboard for restaurant operations and analytics.",
+      fullDescription: "RestaurantPro needed a comprehensive dashboard that would give restaurant managers real-time insights into their operations. We designed an intuitive interface that displays key metrics, inventory levels, staff scheduling, and customer feedback in an easy-to-understand format.",
+      tags: ["Dashboard Design", "Data Visualization", "Web App"],
+      image: "https://images.unsplash.com/photo-1554774853-719586f82d77?w=800&h=600&fit=crop",
+      results: ["35% reduction in management time", "90% user adoption rate", "25% operational efficiency increase"]
     }
   ];
 
-  const testimonials = [
-    {
-      quote: "Next.Level.Design transformed our online presence completely. Our conversion rate increased by 400% within just 3 months.",
-      author: "Sarah Johnson",
-      position: "CEO, TechStart Solutions",
-      company: "TechStart"
-    },
-    {
-      quote: "The team's attention to detail and strategic approach helped us achieve results we never thought possible.",
-      author: "Michael Chen",
-      position: "Founder, EcoLife Marketplace",
-      company: "EcoLife"
-    },
-    {
-      quote: "Professional, creative, and results-driven. They delivered exactly what we needed to scale our business.",
-      author: "Dr. Emily Rodriguez",
-      position: "Director, MedCare Professionals",
-      company: "MedCare"
-    }
-  ];
+  const filteredProjects = activeFilter === "All" 
+    ? projects 
+    : projects.filter(project => project.category === activeFilter);
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-hero">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold text-white mb-6">
+      <section className="py-20 bg-gradient-to-r from-primary to-secondary">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="font-heading text-4xl md:text-6xl font-bold text-white neon-glow mb-6 animate-fade-in">
             Our Portfolio
           </h1>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
-            Discover how we've helped businesses across various industries achieve 
-            remarkable growth through innovative digital solutions.
+          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto animate-slide-in-left">
+            Explore our latest projects and see how we've helped businesses transform their digital presence.
           </p>
         </div>
       </section>
 
-      {/* Portfolio Grid */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Portfolio Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          {/* Filter Buttons */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {filters.map((filter) => (
+              <Button
+                key={filter}
+                variant={activeFilter === filter ? "secondary" : "outline"}
+                onClick={() => setActiveFilter(filter)}
+                className="transition-smooth"
+              >
+                {filter}
+              </Button>
+            ))}
+          </div>
+
+          {/* Projects Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <Card key={index} className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg">
+            {filteredProjects.map((project) => (
+              <Card key={project.id} className="group overflow-hidden border-0 shadow-elegant hover:shadow-hover transition-smooth">
                 <div className="relative overflow-hidden">
-                  <img
-                    src={project.image}
+                  <img 
+                    src={project.image} 
                     alt={project.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-48 object-cover transition-smooth group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="flex items-center justify-between">
-                      <div className="bg-accent-red text-white px-3 py-1 rounded-full text-sm font-semibold">
-                        {project.results}
-                      </div>
-                      <Button variant="ghost" size="sm" className="text-white hover:bg-white/20" onClick={() => handleViewProject(project.title)}>
-                        <ExternalLink className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-primary text-white px-2 py-1 rounded text-xs">
-                      {project.category}
-                    </span>
+                  <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-smooth flex items-center justify-center">
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="secondary" size="sm">
+                          <Eye className="h-4 w-4 mr-2" />
+                          View Details
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                        <DialogHeader>
+                          <DialogTitle className="font-heading text-2xl">{project.title}</DialogTitle>
+                        </DialogHeader>
+                        <div className="space-y-6">
+                          <img 
+                            src={project.image} 
+                            alt={project.title}
+                            className="w-full h-64 object-cover rounded-lg"
+                          />
+                          
+                          <div className="grid md:grid-cols-2 gap-6">
+                            <div>
+                              <h3 className="font-heading text-lg font-semibold mb-2">Project Overview</h3>
+                              <p className="text-muted-foreground mb-4">{project.fullDescription}</p>
+                              
+                              <div className="mb-4">
+                                <h4 className="font-heading font-semibold mb-2">Client:</h4>
+                                <p className="text-muted-foreground">{project.client}</p>
+                              </div>
+                              
+                              <div>
+                                <h4 className="font-heading font-semibold mb-2">Services:</h4>
+                                <div className="flex flex-wrap gap-2">
+                                  {project.tags.map((tag, index) => (
+                                    <Badge key={index} variant="secondary">{tag}</Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div>
+                              <h3 className="font-heading text-lg font-semibold mb-2">Results</h3>
+                              <ul className="space-y-2">
+                                {project.results.map((result, index) => (
+                                  <li key={index} className="flex items-center text-muted-foreground">
+                                    <div className="w-2 h-2 bg-secondary rounded-full mr-3"></div>
+                                    {result}
+                                  </li>
+                                ))}
+                              </ul>
+                              
+                              <Button variant="accent" className="mt-6 w-full">
+                                <ExternalLink className="h-4 w-4 mr-2" />
+                                Visit Project
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </div>
                 
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-foreground mb-2">{project.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, i) => (
-                      <span key={i} className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
-                        {tag}
-                      </span>
-                    ))}
+                  <div className="flex items-center justify-between mb-2">
+                    <Badge variant="outline">{project.category}</Badge>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Results Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
-              Proven Results That Matter
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Our portfolio speaks for itself. Here's what we've achieved for our clients.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { metric: "500+", label: "Projects Completed", icon: Award },
-              { metric: "98%", label: "Client Satisfaction", icon: Award },
-              { metric: "300%", label: "Average Growth", icon: Award }
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-primary rounded-full mb-4">
-                  <stat.icon className="h-8 w-8 text-white" />
-                </div>
-                <div className="text-4xl font-bold text-foreground mb-2">{stat.metric}</div>
-                <div className="text-muted-foreground">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
-              What Our Clients Say
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Don't just take our word for it. Here's what our clients have to say about working with us.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="border-0 shadow-lg">
-                <CardContent className="p-6">
-                  <div className="mb-4">
-                    <div className="flex text-primary mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                        </svg>
-                      ))}
-                    </div>
-                    <p className="text-muted-foreground italic mb-4">"{testimonial.quote}"</p>
-                  </div>
-                  <div>
-                    <div className="font-semibold text-foreground">{testimonial.author}</div>
-                    <div className="text-sm text-muted-foreground">{testimonial.position}</div>
-                    <div className="text-sm text-primary font-medium">{testimonial.company}</div>
-                  </div>
+                  <h3 className="font-heading text-xl font-semibold mb-2">{project.title}</h3>
+                  <p className="text-muted-foreground text-sm mb-3">{project.client}</p>
+                  <p className="text-muted-foreground">{project.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -222,16 +202,16 @@ const Portfolio = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-hero-alt">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Ready to Join Our Success Stories?
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-6">
+            Ready to Start Your Project?
           </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Let's create something amazing together. Your project could be our next featured case study.
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Let's create something amazing together. Get in touch to discuss your next project.
           </p>
-          <Button variant="secondary" size="lg" className="bg-white text-accent-red hover:bg-white/90" onClick={handleStartProject}>
-            Start Your Project
+          <Button variant="hero" size="xl" asChild>
+            <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Start Your Project</Link>
           </Button>
         </div>
       </section>
