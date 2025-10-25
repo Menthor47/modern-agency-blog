@@ -5,7 +5,8 @@ import { Calendar, User, ArrowRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-// ...other imports...
+import SEOHead from "@/components/ui/seo-head";
+import JsonLd from "@/components/ui/json-ld";
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -23,8 +24,34 @@ const Blog = () => {
 
   const featuredPost = filteredPosts[0];
 
+  const blogStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Next.Level.Design Blog",
+    "description": "Latest trends, tips, and insights in digital marketing, web design, and business growth strategies",
+    "url": "https://preview--modern-agency-blog.lovable.app/blog",
+    "blogPost": blogPosts.map(post => ({
+      "@type": "BlogPosting",
+      "headline": post.title,
+      "description": post.excerpt,
+      "datePublished": post.date,
+      "author": {
+        "@type": "Person",
+        "name": post.author
+      },
+      "image": post.image
+    }))
+  };
+
   return (
     <div className="min-h-screen pt-20">
+      <SEOHead
+        title="Blog - Digital Marketing Tips & Insights | Next.Level.Design"
+        description="Stay updated with the latest trends, tips, and insights in digital marketing, web design, and business growth strategies from our expert team."
+        keywords="digital marketing blog, web design tips, SEO insights, business growth, marketing trends"
+        structuredData={blogStructuredData}
+      />
+      <JsonLd data={blogStructuredData} />
       {/* Hero Section */}
       <section className="py-20 bg-gradient-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

@@ -86,27 +86,36 @@ const Navigation = () => {
               variant="ghost"
               size="sm"
               onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+              aria-haspopup="true"
               className="hover:bg-primary/10"
             >
               <div className="relative w-5 h-5">
-                <Menu className={`h-5 w-5 absolute transition-all duration-300 ${isOpen ? 'opacity-0 rotate-90' : 'opacity-100 rotate-0'}`} />
-                <X className={`h-5 w-5 absolute transition-all duration-300 ${isOpen ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-90'}`} />
+                <Menu className={`h-5 w-5 absolute transition-all duration-300 ${isOpen ? 'opacity-0 rotate-90' : 'opacity-100 rotate-0'}`} aria-hidden="true" />
+                <X className={`h-5 w-5 absolute transition-all duration-300 ${isOpen ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-90'}`} aria-hidden="true" />
               </div>
             </Button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
-        <div className={`md:hidden transition-all duration-300 overflow-hidden ${
-          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`}>
+        <div 
+          id="mobile-menu"
+          className={`md:hidden transition-all duration-300 overflow-hidden ${
+            isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+          role="menu"
+          aria-label="Mobile navigation menu"
+        >
           <div className="border-t border-border bg-white/95 backdrop-blur-md">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item, index) => (
                 <Link
                   key={item.name}
                   to={item.href}
+                  role="menuitem"
                   className={`block px-3 py-2 text-base font-medium transition-all duration-200 rounded-md transform ${
                     isActive(item.href)
                       ? "text-primary bg-primary/10 scale-105"
@@ -114,12 +123,19 @@ const Navigation = () => {
                   }`}
                   onClick={() => setIsOpen(false)}
                   style={{ animationDelay: `${index * 0.05}s` }}
+                  tabIndex={isOpen ? 0 : -1}
                 >
                   {item.name}
                 </Link>
               ))}
               <div className="px-3 py-2">
-                <Button variant="hero" size="sm" className="w-full" onClick={handleGetAudit}>
+                <Button 
+                  variant="hero" 
+                  size="sm" 
+                  className="w-full" 
+                  onClick={handleGetAudit}
+                  tabIndex={isOpen ? 0 : -1}
+                >
                   Get Your Free Audit
                 </Button>
               </div>

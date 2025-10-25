@@ -3,6 +3,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users, Target, Lightbulb, Award } from "lucide-react";
 import cyberTeamOffice from "@/assets/cyber-team-office.jpg";
+import SEOHead from "@/components/ui/seo-head";
+import JsonLd from "@/components/ui/json-ld";
 
 const About = () => {
   const values = [
@@ -58,8 +60,30 @@ const About = () => {
     { year: "2024", event: "Pioneering AI-powered design tools and sustainable web practices" }
   ];
 
+  const aboutStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Next.Level.Design",
+      "description": "A team of passionate designers, developers, and strategists dedicated to creating digital experiences that drive growth and innovation",
+      "foundingDate": "2019",
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "value": "10-50"
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="About Us - Meet the Team | Next.Level.Design"
+        description="Learn about Next.Level.Design's mission, values, and team. We're passionate designers, developers, and strategists creating digital experiences that drive growth."
+        keywords="about us, digital agency team, web design agency, our mission, company values"
+        structuredData={aboutStructuredData}
+      />
+      <JsonLd data={aboutStructuredData} />
       {/* Hero Section */}
       <section className="relative py-20 gradient-cyber overflow-hidden">
         <div className="container mx-auto px-4 text-center">

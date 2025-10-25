@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Link } from "react-router-dom";
 import { ExternalLink, Eye } from "lucide-react";
+import SEOHead from "@/components/ui/seo-head";
+import JsonLd from "@/components/ui/json-ld";
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -84,8 +86,32 @@ const Portfolio = () => {
     ? projects 
     : projects.filter(project => project.category === activeFilter);
 
+  const portfolioStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Our Portfolio",
+    "description": "Explore our latest projects in web design, branding, UX/UI design, and e-commerce development",
+    "url": "https://preview--modern-agency-blog.lovable.app/portfolio",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": projects.map((project, index) => ({
+        "@type": "CreativeWork",
+        "name": project.title,
+        "description": project.description,
+        "position": index + 1
+      }))
+    }
+  };
+
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Portfolio - Our Work & Case Studies | Next.Level.Design"
+        description="Explore our portfolio of successful web design, branding, and digital marketing projects. See how we've helped businesses transform their digital presence."
+        keywords="portfolio, web design portfolio, case studies, project examples, our work"
+        structuredData={portfolioStructuredData}
+      />
+      <JsonLd data={portfolioStructuredData} />
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-r from-primary to-secondary">
         <div className="container mx-auto px-4 text-center">

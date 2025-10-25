@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import SEOHead from "@/components/ui/seo-head";
+import JsonLd from "@/components/ui/json-ld";
 import { 
   Palette, 
   Code, 
@@ -80,8 +82,40 @@ const Services = () => {
     }
   ];
 
+  const servicesStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Digital Marketing Services",
+    "provider": {
+      "@type": "Organization",
+      "name": "Next.Level.Design",
+      "url": "https://preview--modern-agency-blog.lovable.app"
+    },
+    "areaServed": "Global",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Digital Services",
+      "itemListElement": services.map((service, index) => ({
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": service.title,
+          "description": service.description
+        },
+        "position": index + 1
+      }))
+    }
+  };
+
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Our Services - Digital Marketing & Web Design | Next.Level.Design"
+        description="Comprehensive digital solutions including web design, development, UX/UI design, and digital marketing. Transform your business with our expert team."
+        keywords="web design services, web development, digital marketing, UX UI design, branding, SEO services"
+        structuredData={servicesStructuredData}
+      />
+      <JsonLd data={servicesStructuredData} />
       {/* Hero Section */}
       <section 
         className="relative min-h-screen flex items-center justify-center overflow-hidden"

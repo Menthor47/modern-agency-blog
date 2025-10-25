@@ -6,6 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import SEOHead from "@/components/ui/seo-head";
+import JsonLd from "@/components/ui/json-ld";
 import { 
   MapPin, 
   Phone, 
@@ -81,8 +83,46 @@ const Contact = () => {
     { icon: <Instagram className="h-5 w-5" />, name: "Instagram", url: "#" }
   ];
 
+  const contactStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Next.Level.Design",
+      "url": "https://preview--modern-agency-blog.lovable.app",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-555-123-4567",
+        "contactType": "Customer Service",
+        "areaServed": "Global",
+        "availableLanguage": "English",
+        "hoursAvailable": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Design Street",
+        "addressLocality": "San Francisco",
+        "addressRegion": "CA",
+        "postalCode": "94102",
+        "addressCountry": "US"
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Contact Us - Get Your Free Audit | Next.Level.Design"
+        description="Ready to transform your digital presence? Contact Next.Level.Design for a free consultation and website audit. Let's discuss your project today."
+        keywords="contact us, free website audit, digital marketing consultation, get a quote, contact digital agency"
+        structuredData={contactStructuredData}
+      />
+      <JsonLd data={contactStructuredData} />
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-r from-primary to-secondary">
         <div className="container mx-auto px-4 text-center">

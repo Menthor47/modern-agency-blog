@@ -19,6 +19,8 @@ const buttonVariants = cva(
         glass: "glass-card text-foreground hover:bg-white/10 border border-white/20 hover:shadow-neon",
         neon: "bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground neon-border hover:animate-neon-pulse",
         hero: "gradient-cyber text-primary-foreground hover:animate-neon-pulse transform hover:scale-105 glass-card",
+        "hero-outline": "border-2 border-white/40 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 hover:border-white/60 transition-all duration-300 hover:scale-105",
+        "hero-secondary": "bg-white text-primary hover:bg-white/90 shadow-neon hover:shadow-glow transition-all duration-300 hover:scale-105",
         accent: "bg-accent text-accent-foreground hover:bg-accent/80 shadow-neon hover:animate-neon-pulse",
       },
       size: {
