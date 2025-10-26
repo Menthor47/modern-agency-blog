@@ -8,6 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import SEOHead from "@/components/ui/seo-head";
 import JsonLd from "@/components/ui/json-ld";
+import { supabase } from "@/integrations/supabase/client";
+import { z } from "zod";
 import { 
   MapPin, 
   Phone, 
@@ -16,8 +18,29 @@ import {
   Twitter,
   Linkedin,
   Instagram,
-  Send
+  Send,
+  Loader2
 } from "lucide-react";
+
+// Contact form validation schema
+const contactFormSchema = z.object({
+  name: z.string()
+    .trim()
+    .min(2, "Name must be at least 2 characters")
+    .max(100, "Name must be less than 100 characters"),
+  company: z.string().max(100).optional(),
+  email: z.string()
+    .trim()
+    .email("Invalid email address")
+    .max(255, "Email must be less than 255 characters"),
+  budget: z.string().optional(),
+  project: z.string().optional(),
+  message: z.string()
+    .trim()
+    .min(10, "Message must be at least 10 characters")
+    .max(2000, "Message must be less than 2000 characters"),
+  website: z.string().max(0).optional(), // Honeypot field
+});
 
 const Contact = () => {
   const { toast } = useToast();
@@ -27,27 +50,112 @@ const Contact = () => {
     email: "",
     budget: "",
     project: "",
-    message: ""
+    message: "",
+    website: "", // Honeypot field
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Simulate form submission
-    toast({
-      title: "Message Sent!",
-      description: "We'll get back to you within 24 hours.",
-    });
-    
-    // Reset form
-    setFormData({
-      name: "",
-      company: "",
-      email: "",
-      budget: "",
-      project: "",
-      message: ""
-    });
+    setIsSubmitting(true);
+
+    try {
+      // Validate form data
+      const validatedData = contactFormSchema.parse(formData);
+
+      // Check honeypot field (should be empty)
+      if (validatedData.website && validatedData.website.length > 0) {
+        console.warn("Honeypot field filled - potential spam");
+        toast({
+          title: "Error",
+          description: "Something went wrong. Please try again.",
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Store submission in database
+      const { data: submission, error: dbError } = await supabase
+        .from('contact_submissions')
+        .insert([{
+          name: validatedData.name,
+          company: validatedData.company || null,
+          email: validatedData.email,
+          budget: validatedData.budget || null,
+          project_type: validatedData.project || null,
+          message: validatedData.message,
+        }])
+        .select()
+        .single();
+
+      if (dbError) {
+        console.error("Database error:", dbError);
+        throw new Error("Failed to store submission");
+      }
+
+      console.log("Submission stored:", submission);
+
+      // Send email notifications
+      const { error: emailError } = await supabase.functions.invoke(
+        'send-contact-email',
+        {
+          body: {
+            name: validatedData.name,
+            email: validatedData.email,
+            company: validatedData.company,
+            budget: validatedData.budget,
+            projectType: validatedData.project,
+            message: validatedData.message,
+          }
+        }
+      );
+
+      if (emailError) {
+        console.error('Email send failed:', emailError);
+        // Don't fail the whole submission if email fails
+        toast({
+          title: "Message Saved",
+          description: "Your message was saved but email notification failed. We'll still review it!",
+        });
+      } else {
+        toast({
+          title: "Message Sent Successfully!",
+          description: "We've received your inquiry and will respond within 24 hours.",
+        });
+      }
+
+      // Reset form
+      setFormData({
+        name: "",
+        company: "",
+        email: "",
+        budget: "",
+        project: "",
+        message: "",
+        website: "",
+      });
+
+    } catch (error) {
+      console.error("Submission error:", error);
+      
+      if (error instanceof z.ZodError) {
+        // Show first validation error
+        toast({
+          title: "Validation Error",
+          description: error.errors[0].message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Submission Failed",
+          description: "Please try again or contact us directly via email.",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (field: string, value: string) => {
@@ -227,12 +335,43 @@ const Contact = () => {
                       required
                       placeholder="Tell us about your project, goals, and timeline..."
                       rows={5}
+                      aria-describedby="message-hint"
                     />
+                    <p id="message-hint" className="text-sm text-muted-foreground">
+                      Minimum 10 characters, maximum 2000 characters
+                    </p>
                   </div>
 
-                  <Button type="submit" variant="hero" size="lg" className="w-full">
-                    <Send className="h-4 w-4 mr-2" />
-                    Send Message
+                  {/* Honeypot field - hidden from users, catches bots */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={formData.website}
+                    onChange={(e) => handleChange("website", e.target.value)}
+                    style={{ display: 'none' }}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                  />
+
+                  <Button 
+                    type="submit" 
+                    variant="hero" 
+                    size="lg" 
+                    className="w-full"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-4 w-4 mr-2" />
+                        Send Message
+                      </>
+                    )}
                   </Button>
                 </form>
               </CardContent>
