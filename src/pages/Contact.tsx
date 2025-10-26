@@ -138,18 +138,23 @@ const Contact = () => {
 
     } catch (error) {
       console.error("Submission error:", error);
+      console.error("Error details:", JSON.stringify(error, null, 2));
       
       if (error instanceof z.ZodError) {
         // Show first validation error
+        console.error("Validation errors:", error.errors);
         toast({
           title: "Validation Error",
           description: error.errors[0].message,
           variant: "destructive",
         });
       } else {
+        // Show more detailed error information
+        const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+        console.error("Non-validation error:", errorMessage);
         toast({
           title: "Submission Failed",
-          description: "Please try again or contact us directly via email.",
+          description: `Please try again or contact us directly via email. Error: ${errorMessage}`,
           variant: "destructive",
         });
       }
