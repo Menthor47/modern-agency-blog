@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import SEOHead from "@/components/ui/seo-head";
 import JsonLd from "@/components/ui/json-ld";
 import { 
-  Palette, 
   Code, 
   Smartphone, 
   TrendingUp, 
@@ -13,39 +12,34 @@ import {
   Shield,
   Clock,
   Users,
-  Award,
   Zap
 } from "lucide-react";
 
 const Services = () => {
   const services = [
     {
-      icon: <Palette className="h-12 w-12 text-secondary" />,
-      title: "Branding & Identity",
-      description: "Create memorable brand experiences that resonate with your audience and set you apart from competitors.",
-      features: ["Logo Design", "Brand Guidelines", "Visual Identity", "Brand Strategy"],
-      price: "Starting at $2,500"
+      icon: <Code className="h-12 w-12 text-secondary" />,
+      title: "Web Design & Development",
+      description: "Modern, responsive websites built with React or WordPress. Includes analytics, forms, and fast hosting.",
+      features: ["Design + Copywriting", "SEO Site Structure", "Mobile-First (<2s load)", "Google Analytics Setup", "3 Months Free Support"],
     },
     {
-      icon: <Code className="h-12 w-12 text-secondary" />,
-      title: "Web Development",
-      description: "Build high-performance websites and web applications using modern technologies and best practices.",
-      features: ["Custom Development", "E-commerce", "CMS Integration", "API Development"],
-      price: "Starting at $5,000"
+      icon: <Search className="h-12 w-12 text-secondary" />,
+      title: "Local SEO",
+      description: "Get found by Romanian and international clients searching for your services.",
+      features: ["Google Business Profile", "Local Keywords", "Citation Building", "Review Strategy"],
     },
     {
       icon: <Smartphone className="h-12 w-12 text-secondary" />,
-      title: "UX/UI Design",
-      description: "Design intuitive user experiences that convert visitors into customers and drive business growth.",
-      features: ["User Research", "Wireframing", "Prototyping", "Usability Testing"],
-      price: "Starting at $3,500"
+      title: "Multilingual Websites",
+      description: "Reach international audiences with properly translated, SEO-optimized multilingual sites.",
+      features: ["RO/EN Language Support", "Proper hreflang Setup", "Cultural Localization", "SEO for Each Language"],
     },
     {
       icon: <TrendingUp className="h-12 w-12 text-secondary" />,
-      title: "Digital Marketing",
-      description: "Grow your online presence with data-driven marketing strategies that deliver measurable results.",
-      features: ["Social Media", "Content Marketing", "PPC Campaigns", "Analytics"],
-      price: "Starting at $2,000/month"
+      title: "Performance Optimization",
+      description: "Speed up your existing website for better user experience and search rankings.",
+      features: ["Core Web Vitals", "Image Optimization", "Code Minification", "CDN Setup"],
     }
   ];
 
@@ -53,22 +47,17 @@ const Services = () => {
     {
       icon: <Clock className="h-8 w-8 text-accent" />,
       title: "Fast Delivery",
-      description: "We deliver projects on time without compromising quality."
+      description: "We deliver projects on time without compromising quality. 2-4 week delivery for most projects."
     },
     {
       icon: <Users className="h-8 w-8 text-accent" />,
       title: "Expert Team",
-      description: "Our team consists of industry experts with proven track records."
+      description: "Our team consists of experienced developers and designers with proven track records."
     },
     {
       icon: <Shield className="h-8 w-8 text-accent" />,
       title: "Quality Guarantee",
-      description: "We stand behind our work with comprehensive quality assurance."
-    },
-    {
-      icon: <Award className="h-8 w-8 text-accent" />,
-      title: "Award Winning",
-      description: "Recognized by industry leaders for our innovative solutions."
+      description: "We stand behind our work with comprehensive quality assurance and 3 months free support."
     },
     {
       icon: <Zap className="h-8 w-8 text-accent" />,
@@ -85,16 +74,19 @@ const Services = () => {
   const servicesStructuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": "Digital Marketing Services",
+    "serviceType": "Web Design and Development Services",
     "provider": {
       "@type": "Organization",
       "name": "Next.Level.Design",
-      "url": "https://preview--modern-agency-blog.lovable.app"
+      "url": "https://live.nextleveldesign.art"
     },
-    "areaServed": "Global",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Romania"
+    },
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
-      "name": "Digital Services",
+      "name": "Web Services",
       "itemListElement": services.map((service, index) => ({
         "@type": "Offer",
         "itemOffered": {
@@ -189,12 +181,11 @@ const Services = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between">
-                    <span className="font-heading font-bold text-lg text-secondary">
-                      {service.price}
-                    </span>
-                    <Button variant="secondary">Learn More</Button>
-                  </div>
+                  <Button variant="secondary" className="w-full" asChild>
+                    <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                      Get Started
+                    </Link>
+                  </Button>
                 </CardContent>
               </Card>
             ))}

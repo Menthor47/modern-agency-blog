@@ -122,78 +122,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-            <div>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-6 neon-glow">
-                Meet Our Team
-              </h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                Our diverse team brings together expertise from design, development, and digital marketing to create exceptional results for our clients.
-              </p>
-              <Button variant="glass" size="lg">
-                Join Our Team
-              </Button>
-            </div>
-            <div className="relative">
-              <img 
-                src={cyberTeamOffice}
-                alt="NextLevelDesign team at work" 
-                className="rounded-lg shadow-neon w-full"
-              />
-            </div>
-          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <Card key={index} className="hover:shadow-neon transition-cyber glass-card">
-                <CardContent className="p-6">
-                  <h3 className="font-heading text-xl font-semibold mb-1 text-primary neon-glow">{member.name}</h3>
-                  <p className="text-secondary font-medium mb-3">{member.role}</p>
-                  <p className="text-muted-foreground mb-4">{member.bio}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {member.skills.map((skill, skillIndex) => (
-                      <Badge key={skillIndex} variant="secondary">{skill}</Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-4 neon-glow">
-              Our Journey
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              From startup to industry leader, here's how we've grown and evolved.
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            {milestones.map((milestone, index) => (
-              <div key={index} className="flex items-start mb-8 last:mb-0 group">
-                <div className="flex-shrink-0 w-20 text-right mr-8">
-                  <span className="font-heading font-bold text-secondary text-lg group-hover:neon-glow">
-                    {milestone.year}
-                  </span>
-                </div>
-                <div className="flex-shrink-0 w-4 h-4 rounded-full bg-primary mt-2 mr-8 group-hover:animate-neon-pulse shadow-neon"></div>
-                <div className="flex-1">
-                  <p className="text-foreground">{milestone.event}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 };
