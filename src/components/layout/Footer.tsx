@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -20,20 +20,6 @@ const Footer = () => {
               Transforming brands into digital leaders through innovative design, 
               strategic marketing, and cutting-edge technology solutions.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Instagram className="h-5 w-5" />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -48,9 +34,6 @@ const Footer = () => {
               </Link>
               <Link to="/about" className="block text-gray-300 hover:text-white transition-colors text-sm">
                 About Us
-              </Link>
-              <Link to="/blog" className="block text-gray-300 hover:text-white transition-colors text-sm">
-                Blog
               </Link>
               <Link to="/contact" className="block text-gray-300 hover:text-white transition-colors text-sm">
                 Contact
@@ -76,15 +59,15 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-primary" />
-                <span className="text-gray-300 text-sm">+1 (555) 123-4567</span>
+                <a href="https://wa.me/40724230051" className="text-gray-300 text-sm hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
+                  +40 724 230 051
+                </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-primary" />
-                <span className="text-gray-300 text-sm">hello@nextleveldesign.com</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <MapPin className="h-4 w-4 text-primary" />
-                <span className="text-gray-300 text-sm">123 Digital Ave, Tech City, TC 12345</span>
+                <a href="mailto:contact@nextleveldesign.art" className="text-gray-300 text-sm hover:text-white transition-colors">
+                  contact@nextleveldesign.art
+                </a>
               </div>
             </div>
           </div>

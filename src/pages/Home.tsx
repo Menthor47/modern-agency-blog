@@ -32,10 +32,10 @@ const Home = () => {
   };
 
   const stats = [
-    { icon: Users, value: 500, suffix: "+", label: "Happy Clients" },
-    { icon: Award, value: 98, suffix: "%", label: "Success Rate" },
-    { icon: TrendingUp, value: 300, suffix: "%", label: "Avg. Growth" },
-    { icon: Star, value: 4.7, suffix: "/5", label: "Client Rating" },
+    { icon: Users, value: 10, suffix: "+", label: "Projects Delivered" },
+    { icon: Award, value: 2, suffix: "-4 weeks", label: "Delivery Time" },
+    { icon: TrendingUp, value: 24, suffix: "h", label: "Response Time" },
+    { icon: Star, value: 150, suffix: "%", label: "Lead Growth" },
   ];
 
   const services = [
@@ -63,21 +63,9 @@ const Home = () => {
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
-      company: "TechStart Inc.",
-      content: "Next Level Design transformed our online presence completely. Our conversion rate increased by 250% in just 3 months!",
-      rating: 5,
-    },
-    {
-      name: "Michael Chen",
-      company: "GrowthCorp",
-      content: "The team's expertise in digital marketing is unmatched. They delivered results beyond our expectations.",
-      rating: 5,
-    },
-    {
-      name: "Emily Rodriguez",
-      company: "InnovateLab",
-      content: "Professional, creative, and results-driven. Our brand has never looked better!",
+      name: "Ciprian S.",
+      company: "SZ Trading International",
+      content: "Got a site up in two weeks. More leads in one month than last quarter.",
       rating: 5,
     },
   ];
@@ -86,42 +74,36 @@ const Home = () => {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Next.Level.Design",
-    "description": "Leading digital marketing agency specializing in web design, SEO, and growth strategies",
-    "url": "https://preview--modern-agency-blog.lovable.app",
-    "logo": "https://preview--modern-agency-blog.lovable.app/logo.png",
+    "description": "Romanian web design agency specializing in SEO-optimized, multilingual websites",
+    "url": "https://live.nextleveldesign.art",
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+1-555-123-4567",
-      "contactType": "Customer Service"
+      "telephone": "+40724230051",
+      "contactType": "Customer Service",
+      "areaServed": ["RO", "EU"],
+      "availableLanguage": ["Romanian", "English"]
     },
-    "sameAs": [
-      "https://facebook.com/nextleveldesign",
-      "https://twitter.com/nextleveldesign",
-      "https://linkedin.com/company/nextleveldesign"
-    ],
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "New York",
-      "addressRegion": "NY",
-      "addressCountry": "US"
+      "addressCountry": "RO"
     }
   };
 
   const webPageStructuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Next.Level.Design - Transform Your Business with Digital Excellence",
-    "description": "Leading digital marketing agency specializing in web design, SEO, and growth strategies. Join 500+ companies that trust us to elevate their digital presence.",
-    "url": "https://preview--modern-agency-blog.lovable.app",
+    "name": "Next.Level.Design - Romanian Web Design That Generates Leads",
+    "description": "Professional, SEO-optimized websites delivered in 2-4 weeks. For Romanian companies scaling internationally.",
+    "url": "https://live.nextleveldesign.art",
     "mainEntity": organizationStructuredData
   };
 
   return (
     <div className="min-h-screen">
       <SEOHead
-        title="Next.Level.Design - Transform Your Business with Digital Excellence"
-        description="Leading digital marketing agency specializing in web design, SEO, and growth strategies. Join 500+ companies that trust us to elevate their digital presence."
-        keywords="digital marketing agency, web design, SEO optimization, digital transformation, online marketing, website development"
+        title="Next.Level.Design - Romanian Web Design That Gets Results"
+        description="Web design agency in Romania. Professional, SEO-optimized websites delivered in 2-4 weeks. For Romanian companies scaling internationally."
+        keywords="romanian web design, multilingual websites, local SEO, web development romania, SEO romania"
         structuredData={webPageStructuredData}
       />
       <JsonLd data={organizationStructuredData} />
@@ -146,20 +128,20 @@ const Home = () => {
                 </div>
                 
                 <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                  Transform Your Business
+                  Romanian Web Design
                   <span className="block text-transparent bg-gradient-to-r from-primary-glow to-white bg-clip-text">
-                    with Next-Level Design
+                    That Generates Leads
                   </span>
                 </h1>
                 
                 <p className="text-xl text-white/90 mb-8 leading-relaxed">
-                  We create stunning, high-converting websites that drive results for 
-                  ambitious businesses. Join 500+ companies that trust us to elevate their digital presence.
+                  Professional, SEO-optimized websites—delivered in 2-4 weeks. 
+                  Transparent process. For Romanian companies scaling internationally.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <MagneticButton variant="hero" size="lg" className="group" onClick={handleGetAudit}>
-                    Get Your Free Audit
+                    Book Free 30-Min Strategy Call
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </MagneticButton>
                   <MagneticButton variant="hero-outline" size="lg" onClick={handleViewWork}>
@@ -171,11 +153,15 @@ const Home = () => {
                 <div className="flex items-center gap-6 mt-8 pt-8 border-t border-white/20">
                   <div className="flex items-center gap-2">
                     <CheckCircle className="h-5 w-5 text-green-400" />
-                    <span className="text-white/80">Free Strategy Call</span>
+                    <span className="text-white/80">Actionable advice</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle className="h-5 w-5 text-green-400" />
-                    <span className="text-white/80">Flexible Contracts</span>
+                    <span className="text-white/80">No sales pitch</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-green-400" />
+                    <span className="text-white/80">Reply in 24h</span>
                   </div>
                 </div>
               </div>
@@ -279,8 +265,8 @@ const Home = () => {
           
           <ScrollReveal direction="up" delay={400}>
             <div className="text-center mt-12">
-              <MagneticButton size="lg" className="group" onClick={handleViewServices}>
-                View All Services
+              <MagneticButton size="lg" className="group" onClick={handleGetAudit}>
+                Start Your Project
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </MagneticButton>
             </div>
@@ -336,17 +322,17 @@ const Home = () => {
         <ScrollReveal direction="up">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-4xl font-bold text-white mb-6">
-              Ready to Transform Your Digital Presence?
+              Ready to Scale Your Business Online?
             </h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Join hundreds of businesses that have accelerated their growth with our proven strategies.
+              Get a professional website that actually brings you leads. Let's discuss your project.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <MagneticButton variant="hero-secondary" size="lg" onClick={handleGetAudit}>
-                Get Free Audit
+                Book Free Strategy Call
               </MagneticButton>
-              <MagneticButton variant="hero-outline" size="lg" onClick={handleScheduleConsultation}>
-                Schedule Consultation
+              <MagneticButton variant="hero-outline" size="lg" onClick={handleViewWork}>
+                View Portfolio
               </MagneticButton>
             </div>
           </div>

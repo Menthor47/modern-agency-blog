@@ -11,13 +11,9 @@ import JsonLd from "@/components/ui/json-ld";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 import { 
-  MapPin, 
   Phone, 
   Mail, 
   Clock,
-  Twitter,
-  Linkedin,
-  Instagram,
   Send,
   Loader2
 } from "lucide-react";
@@ -169,32 +165,24 @@ const Contact = () => {
 
   const contactInfo = [
     {
-      icon: <MapPin className="h-6 w-6 text-secondary" />,
-      title: "Our Office",
-      details: ["123 Design Street", "Creative District", "San Francisco, CA 94102"]
+      icon: <Mail className="h-6 w-6 text-secondary" />,
+      title: "Email",
+      details: ["contact@nextleveldesign.art"],
+      link: "mailto:contact@nextleveldesign.art"
     },
     {
       icon: <Phone className="h-6 w-6 text-secondary" />,
-      title: "Phone",
-      details: ["+1 (555) 123-4567", "+1 (555) 987-6543"]
-    },
-    {
-      icon: <Mail className="h-6 w-6 text-secondary" />,
-      title: "Email",
-      details: ["hello@nextleveldesign.com", "support@nextleveldesign.com"]
+      title: "WhatsApp / Phone",
+      details: ["+40 724 230 051"],
+      link: "https://wa.me/40724230051"
     },
     {
       icon: <Clock className="h-6 w-6 text-secondary" />,
-      title: "Business Hours",
-      details: ["Monday - Friday: 9:00 AM - 6:00 PM", "Saturday: 10:00 AM - 4:00 PM", "Sunday: Closed"]
-    }
+      title: "Response Time",
+      details: ["We reply within 24 hours", "Monday - Friday"]
+    },
   ];
 
-  const socialLinks = [
-    { icon: <Twitter className="h-5 w-5" />, name: "Twitter", url: "#" },
-    { icon: <Linkedin className="h-5 w-5" />, name: "LinkedIn", url: "#" },
-    { icon: <Instagram className="h-5 w-5" />, name: "Instagram", url: "#" }
-  ];
 
   const contactStructuredData = {
     "@context": "https://schema.org",
@@ -202,27 +190,15 @@ const Contact = () => {
     "mainEntity": {
       "@type": "Organization",
       "name": "Next.Level.Design",
-      "url": "https://preview--modern-agency-blog.lovable.app",
+      "url": "https://live.nextleveldesign.art",
+      "email": "contact@nextleveldesign.art",
+      "telephone": "+40724230051",
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+1-555-123-4567",
+        "telephone": "+40724230051",
         "contactType": "Customer Service",
-        "areaServed": "Global",
-        "availableLanguage": "English",
-        "hoursAvailable": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "09:00",
-          "closes": "18:00"
-        }
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "123 Design Street",
-        "addressLocality": "San Francisco",
-        "addressRegion": "CA",
-        "postalCode": "94102",
-        "addressCountry": "US"
+        "areaServed": ["RO", "EU"],
+        "availableLanguage": ["Romanian", "English"]
       }
     }
   };
@@ -405,9 +381,21 @@ const Contact = () => {
                             {info.title}
                           </h3>
                           {info.details.map((detail, detailIndex) => (
-                            <p key={detailIndex} className="text-muted-foreground">
-                              {detail}
-                            </p>
+                            info.link ? (
+                              <a 
+                                key={detailIndex} 
+                                href={info.link}
+                                className="text-muted-foreground hover:text-primary transition-colors block"
+                                target={info.link.startsWith('http') ? '_blank' : undefined}
+                                rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                              >
+                                {detail}
+                              </a>
+                            ) : (
+                              <p key={detailIndex} className="text-muted-foreground">
+                                {detail}
+                              </p>
+                            )
                           ))}
                         </div>
                       </div>
@@ -416,51 +404,11 @@ const Contact = () => {
                 ))}
               </div>
 
-              {/* Social Links */}
-              <div>
-                <h3 className="font-heading text-xl font-semibold mb-4">Follow Us</h3>
-                <div className="flex space-x-4">
-                  {socialLinks.map((social, index) => (
-                    <a
-                      key={index}
-                      href={social.url}
-                      className="w-12 h-12 bg-secondary text-secondary-foreground rounded-lg flex items-center justify-center hover:bg-secondary/80 transition-smooth"
-                      aria-label={social.name}
-                    >
-                      {social.icon}
-                    </a>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="font-heading text-3xl font-bold text-primary mb-4">
-              Visit Our Office
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Located in the heart of San Francisco's creative district.
-            </p>
-          </div>
-          
-          {/* Placeholder for map - in a real project, you'd integrate with Google Maps */}
-          <div className="bg-muted rounded-lg h-96 flex items-center justify-center shadow-elegant">
-            <div className="text-center">
-              <MapPin className="h-12 w-12 text-secondary mx-auto mb-4" />
-              <p className="text-lg font-heading font-semibold">Interactive Map</p>
-              <p className="text-muted-foreground">
-                123 Design Street, Creative District, San Francisco, CA 94102
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };
